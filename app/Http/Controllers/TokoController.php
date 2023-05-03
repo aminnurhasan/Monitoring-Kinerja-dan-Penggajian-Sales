@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Toko;
 
 class TokoController extends Controller
 {
@@ -11,9 +13,10 @@ class TokoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $toko = Toko::with('user');
+        return view('toko', compact('toko'));
     }
 
     /**
