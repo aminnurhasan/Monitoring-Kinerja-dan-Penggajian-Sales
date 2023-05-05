@@ -48,11 +48,15 @@
                         <form action="{{ route('user.update', $user->id) }}" method="post" enctype="multipart/form-data">
                             @csrf @method('PUT')
                             <div class="form-group">
-                                <label for="">Name</label>
+                                <label for="">ID</label>
+                                <input type="number" name="id" class="form-control" value="{{ old('id', $user->id) }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Nama</label>
                                 <input type="text" name="name" class="form-control" value="{{ old('name', $user->name) }}">
                             </div>
                             <div class="form-group">
-                                <label for="">e-Mail</label>
+                                <label for="">Email</label>
                                 <input type="email" name="email" class="form-control" value="{{ old('email', $user->email) }}">
                             </div>
                             <div class="form-group">
@@ -73,8 +77,8 @@
                             <div class="form-group">
                                 <label for="">Photo</label>
                                 <input type="file" name="image" class="form-control-file">
-                                @if ($user->photo)
-                                    <img src="{{ asset('/storage/profile/' . $user->photo) }}" alt="" height="100">
+                                @if ($user->foto)
+                                    <img src="{{ asset('/storage/profile/' . $user->foto) }}" alt="" height="100">
                                 @endif
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>

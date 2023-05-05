@@ -34,9 +34,16 @@
                 </div>
                 @endif
 
-                <!-- Attendance Chart -->
                 <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary mb-2">Add</a>
 
+                <div class="pb-3">
+                    <form class="d-flex" action="{{ url('user') }}" method="get">
+                        <input class="form-control m-1" type="search" name="katakunci"
+                            value="{{ Request::get('katakunci') }}" placeholder="Cari" aria-label="Search">
+                        <button class="btn btn-secondary m-1" type="submit">Cari</button>
+                    </form>
+                </div>
+                
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
@@ -47,15 +54,39 @@
                     <!-- /.card-header -->
                     <div class="card-body">
 
-                        <table class="table" id="datatable">
+                        <table class="table">
                             <thead>
                                 <tr>
+                                    <th>No</th>
                                     <th>ID</th>
                                     <th>Name</th>
                                     <th>E-Mail</th>
-                                    <th></th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
+                                <?php
+                                    $no = $user->firstItem();
+                                ?>
+                                @foreach ($user as $item)
+                                    <tr>
+                                        <td>{{ $no }}</td>
+                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->email }}</td>
+                                        <td>
+                                            <a href='{{ route('user.show', $item->id) }}' class="btn btn-warning btn-sm">Show</a>
+                                            <a href='{{ url('user/' . $item->id . '/edit') }}' class="btn btn-warning btn-sm">Edit</a>
+                                            <form onsubmit="return confirm('Apakah Anda Ingin Menghapus Data ?')" class="d-inline"
+                                                action="{{ url('user/' . $item->id) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" name='submit' class="btn btn-danger btn-sm">Del</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <?php $no++; ?>
+                                @endforeach
+                            </tbody>
                         </table>
 
                     </div>
@@ -70,7 +101,7 @@
 
 @endsection
 
-@push('scripts')
+{{-- @push('scripts')
 <script>
     $(document).ready(function() {
         $('#datatable').DataTable({
@@ -87,4 +118,4 @@
         });
     });
 </script>
-@endpush
+@endpush --}}

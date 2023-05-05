@@ -48,11 +48,15 @@
                         <form action="{{ route('user.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <label for="">Name</label>
+                                <label for="">ID</label>
+                                <input type="number" name="id" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Nama</label>
                                 <input type="text" name="name" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="">e-Mail</label>
+                                <label for="">Email</label>
                                 <input type="email" name="email" class="form-control">
                             </div>
                             <div class="form-group">
@@ -60,7 +64,7 @@
                                 <input type="password" name="password" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="" style="display: block">Is Admin</label>
+                                <label for="" style="display: block">Is Admin?</label>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" name="is_admin" type="radio" id="inlineRadio1" value="1">
                                     <label class="form-check-label" for="inlineRadio1">Yes</label>
@@ -71,8 +75,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="">Photo</label>
-                                <input type="file" name="image" class="form-control-file">
+                                <label for="">Foto</label>
+                                <input type="file" name="foto" class="form-control-file">
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
