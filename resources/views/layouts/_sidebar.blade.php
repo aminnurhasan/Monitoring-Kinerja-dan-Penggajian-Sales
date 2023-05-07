@@ -47,6 +47,14 @@
                     </p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ url('/transaksi') }}" class="nav-link">
+                    <i class="nav-icon fas fa-user"></i>
+                    <p>
+                        Transaksi
+                    </p>
+                </a>
+            </li>
             <li class="nav-header">LABELS</li>
             <li class="nav-item">
                 <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
