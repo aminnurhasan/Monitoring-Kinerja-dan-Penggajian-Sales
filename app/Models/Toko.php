@@ -13,7 +13,7 @@ class Toko extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'users_id',
+        'user_id',
         'title',
         'alamat',
         'latitude',

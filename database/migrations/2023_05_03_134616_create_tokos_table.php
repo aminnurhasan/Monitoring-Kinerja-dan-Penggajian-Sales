@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('toko', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('users_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('title');
             $table->string('alamat');
             $table->string('latitude');
             $table->string('longitude');
             $table->string('snippet');
 
-            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
         });
     }
 

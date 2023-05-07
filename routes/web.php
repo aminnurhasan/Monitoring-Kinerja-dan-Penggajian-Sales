@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TokoController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TokoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('toko', [TokoController::class, 'index']);
+Route::resource('toko', TokoController::class);
 
 Auth::routes();
 

@@ -13,10 +13,27 @@ class TokoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+    }
+
     public function index(Request $request)
     {
+        $katakunci = $request->katakunci;
+        $jumlahbaris = 10;
         $toko = Toko::with('user');
-        return view('toko', compact('toko'));
+        if(strlen($katakunci)){
+            $toko = Toko::where('title', 'like', "%$katakunci%")
+            ->orWhere('alamat', 'like', "%$katakunci%")
+            ->orWhere('latitude', 'like', "%$katakunci%")
+            ->orWhere('longitude', 'like', "%$katakunci%")
+            ->orWhere('snippet', 'like', "%$katakunci%")
+                ->paginate($jumlahbaris);
+        } else{
+            $toko = Toko::orderBy('id', 'asc')->paginate($jumlahbaris);
+        }
+        return view('pages.toko.index', compact("toko"));
     }
 
     /**
@@ -26,7 +43,8 @@ class TokoController extends Controller
      */
     public function create()
     {
-        //
+        $user = User::all();
+        return view('pages.toko.create', compact('user'));
     }
 
     /**
@@ -37,7 +55,34 @@ class TokoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'user_id' => 'required',
+            'title' => 'required',
+            'alamat' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'snippet' => 'required',
+        ],[
+            'user_id.required' => 'Nama User Wajib Diisi',
+            'title.required' => 'Nama Toko Wajib Diisi',
+            'alamat.required' => 'Alamat Toko Wajib Diisi',
+            'latitude.required' => 'Latitude Wajib Diisi',
+            'longitude.required' => 'Longitude Wajib Diisi',
+            'snippet.required' => 'Snippet Wajib Diisi'
+        ]);
+
+        $toko = [
+            'user_id' => $request->user_id,
+            'title' => $request->title,
+            'alamat' => $request->alamat,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+            'snippet' => $request->snippet,
+        ];
+        Toko::create($toko);
+        // Toko::create($request->all());
+
+        return redirect()->route('toko.index');
     }
 
     /**
@@ -82,6 +127,18 @@ class TokoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $toko = Toko::find($id);
+        $toko->delete();
+        return redirect()->route('toko.index');
     }
+
+    // public function user(){
+    //     $user = User::all();
+    //     return view('pages.user.index', ['user' => $user]);
+    // }
+
+    // public function toko(){
+    //     $toko = Toko::all();
+    //     return view('pages.toko.index', ['toko' => $toko]);
+    // }
 }
