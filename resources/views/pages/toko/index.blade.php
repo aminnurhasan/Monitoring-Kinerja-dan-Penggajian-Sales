@@ -58,10 +58,10 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>ID</th>
                                     <th>Nama Sales</th>
                                     <th>Nama Toko</th>
                                     <th>Alamat</th>
+                                    <th>Snippet</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -71,15 +71,10 @@
                                 @foreach ($toko as $item)
                                     <tr>
                                         <td>{{ $no }}</td>
-                                        <td>{{ $item->id }}</td>
                                         <td>{{ $item->user->name }}</td>
-                                        {{-- <td>
-                                            @foreach ($toko->users_id as $user)
-                                                {{ $user->name }}
-                                            @endforeach
-                                        </td> --}}
                                         <td>{{ $item->title }}</td>
                                         <td>{{ $item->alamat }}</td>
+                                        <td>{{ $item->snippet }}</td>
                                         <td>
                                             <a href='{{ route('toko.show', $item->id) }}' class="btn btn-warning btn-sm">Show</a>
                                             <a href='{{ url('toko/' . $item->id . '/edit') }}' class="btn btn-warning btn-sm">Edit</a>

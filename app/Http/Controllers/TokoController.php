@@ -93,7 +93,8 @@ class TokoController extends Controller
      */
     public function show($id)
     {
-        //
+        $toko = Toko::findOrFail($id);
+        return view('pages.toko.show', compact('toko'));
     }
 
     /**

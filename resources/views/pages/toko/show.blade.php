@@ -39,24 +39,32 @@
                         <table class="table" id="datatable">
                             <tbody>
                                 <tr>
-                                    <th>ID</th>
-                                    <td>{{ $user->id }}</td>
+                                    <th>ID Toko</th>
+                                    <td>{{ $toko->id }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Name</th>
-                                    <td>{{ $user->name }}</td>
+                                    <th>Nama Karyawan</th>
+                                    <td>{{ $toko->user->name }}</td>
                                 </tr>
                                 <tr>
-                                    <th>E-Mail</th>
-                                    <td>{{ $user->email }}</td>
+                                    <th>Nama Toko</th>
+                                    <td>{{ $toko->title }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Is Admin?</th>
-                                    <td>{{ $user->is_admin ? 'Yes' : 'No' }}</td>
+                                    <th>Alamat</th>
+                                    <td>{{ $toko->alamat }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Photo</th>
-                                    <td><img width="350" src="{{ asset('/storage/profile/' . $user->photo) }}" alt=""></td>
+                                    <th>Latitude</th>
+                                    <td>{{ $toko->latitude }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Longitude</th>
+                                    <td>{{ $toko->longitude }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Snippet</th>
+                                    <td>{{ $toko->snippet }}</td>
                                 </tr>
                             </tbody>
                         </table>
