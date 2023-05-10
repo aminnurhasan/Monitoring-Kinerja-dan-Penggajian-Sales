@@ -5,12 +5,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">User</h1>
+                <h1 class="m-0 text-dark">Transaksi</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item">User</li>
+                    <li class="breadcrumb-item">Transaksi</li>
                     <li class="breadcrumb-item active">Show</li>
                 </ol>
             </div><!-- /.col -->
@@ -31,7 +31,7 @@
                     <div class="card-header">
                         <h3 class="card-title">
                             <i class="ion ion-clipboard mr-1"></i>
-                            User
+                            Transaksi
                         </h3>
                     </div>
                     <!-- /.card-header -->
@@ -39,24 +39,24 @@
                         <table class="table" id="datatable">
                             <tbody>
                                 <tr>
-                                    <th>ID</th>
-                                    <td>{{ $user->id }}</td>
+                                    <th>ID Transaksi</th>
+                                    <td>{{ $transaksi->id }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Name</th>
-                                    <td>{{ $user->name }}</td>
+                                    <th>Nama Toko</th>
+                                    <td>{{ $transaksi->tokoName }}</td>
                                 </tr>
                                 <tr>
-                                    <th>E-Mail</th>
-                                    <td>{{ $user->email }}</td>
+                                    <th>Nama Karyawan</th>
+                                    <td>{{ $transaksi->salesName }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Is Admin?</th>
-                                    <td>{{ $user->is_admin ? 'Yes' : 'No' }}</td>
+                                    <th>Quantity</th>
+                                    <td>{{ $transaksi->quantity }} pack</td>
                                 </tr>
                                 <tr>
-                                    <th>Photo</th>
-                                    <td><img width="350" src="{{ asset('/storage/profile/' . $user->photo) }}" alt=""></td>
+                                    <th>Total Penjualan</th>
+                                    <td>Rp. {{ $transaksi->totalPrice }}</td>
                                 </tr>
                             </tbody>
                         </table>

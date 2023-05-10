@@ -56,10 +56,10 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>ID</th>
-                                    <th>Nama Sales</th>
                                     <th>Nama Toko</th>
-                                    <th>Alamat</th>
+                                    <th>Nama Karyawan</th>
+                                    <th>Quantity</th>
+                                    <th>Total Price</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -69,7 +69,6 @@
                                 @foreach ($transaksi as $item)
                                     <tr>
                                         <td>{{ $no }}</td>
-                                        <td>{{ $item->id }}</td>
                                         <td>{{ $item->tokoName }}</td>
                                         <td>{{ $item->salesName }}</td>
                                         <td>{{ $item->quantity }}</td>

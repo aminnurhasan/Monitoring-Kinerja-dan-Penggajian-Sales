@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-// use App\Traits\ImageStorage;
+use App\Traits\ImageStorage;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    // use ImageStorage;
+    use ImageStorage;
     /**
      * Display a listing of the resource.
      *
