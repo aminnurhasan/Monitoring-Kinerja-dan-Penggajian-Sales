@@ -71,8 +71,8 @@
                                         <td>{{ $no }}</td>
                                         <td>{{ $item->tokoName }}</td>
                                         <td>{{ $item->salesName }}</td>
-                                        <td>{{ $item->quantity }}</td>
-                                        <td>{{ $item->totalPrice }}</td>
+                                        <td>{{ $item->quantity }} Packs</td>
+                                        <td>Rp. {{ number_format($item->totalPrice) }}</td>
                                         <td>
                                             <a href='{{ route('transaksi.show', $item->id) }}' class="btn btn-warning btn-sm">Show</a>
                                             <form onsubmit="return confirm('Apakah Anda Ingin Menghapus Data ?')" class="d-inline"

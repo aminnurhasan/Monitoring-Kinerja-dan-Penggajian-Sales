@@ -52,11 +52,11 @@
                                 </tr>
                                 <tr>
                                     <th>Quantity</th>
-                                    <td>{{ $transaksi->quantity }} pack</td>
+                                    <td>{{ $transaksi->quantity }} Packs</td>
                                 </tr>
                                 <tr>
                                     <th>Total Penjualan</th>
-                                    <td>Rp. {{ $transaksi->totalPrice }}</td>
+                                    <td>Rp. {{ number_format($transaksi->totalPrice) }}</td>
                                 </tr>
                             </tbody>
                         </table>
