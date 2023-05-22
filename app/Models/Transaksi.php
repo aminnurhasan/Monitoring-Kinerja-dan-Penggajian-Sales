@@ -16,4 +16,8 @@ class Transaksi extends Model
         'quantity',
         'totalPrice'
     ];
+
+    public function foto(){
+        return $this->hasOne(Foto::class);
+    }
 }

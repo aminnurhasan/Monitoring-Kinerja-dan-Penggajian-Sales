@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transaksi;
+use App\Models\Foto;
 
 class TransaksiController extends Controller
 {
@@ -21,9 +22,9 @@ class TransaksiController extends Controller
     {
         $katakunci = $request->katakunci;
         $jumlahbaris = 10;
-        $transaksi = Transaksi::all();
+        $transaksi = Transaksi::with('foto');
         if(strlen($katakunci)){
-            $user = User::where('tokoName', 'like', "%$katakunci%")
+            $transaksi = Transaksi::where('tokoName', 'like', "%$katakunci%")
                 ->orWhere('salesName', 'like', "%$katakunci%")
                 ->orWhere('quantity', 'like', "%$katakunci%")
                 ->orWhere('totalPrice', 'like', "%$katakunci%")
@@ -61,9 +62,9 @@ class TransaksiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($transaksi_id)
     {
-        $transaksi = Transaksi::findOrFail($id);
+        $transaksi = Foto::findOrFail($transaksi_id);
         return view('pages.transaksi.show', compact('transaksi'));
     }
 

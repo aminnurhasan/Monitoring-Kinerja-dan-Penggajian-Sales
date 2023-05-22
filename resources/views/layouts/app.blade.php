@@ -18,6 +18,7 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.21/r-2.2.5/datatables.min.css"/>
+    @livewireStyles
 </head>
 <body class="hold-transition sidebar-mini">
     <!-- Site wrapper -->
@@ -80,7 +81,7 @@
     <!-- Chartisan -->
     <script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script>
 
-
+    @livewireScripts
     @stack('scripts')
 </body>
 </html>

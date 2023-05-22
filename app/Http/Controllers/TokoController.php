@@ -23,11 +23,11 @@ class TokoController extends Controller
         $katakunci = $request->katakunci;
         $jumlahbaris = 10;
         $toko = Toko::with('user');
-        if(strlen($katakunci)){
-            $toko = Toko::where('title', 'like', "%$katakunci%")
+        // $namaSales = $request->toko->user->name;
+        if($katakunci){
+            $toko = $toko->where('title', 'like', "%$katakunci%")
+            // ->orWhere("$namaSales", 'like', "%$katakunci%")
             ->orWhere('alamat', 'like', "%$katakunci%")
-            ->orWhere('latitude', 'like', "%$katakunci%")
-            ->orWhere('longitude', 'like', "%$katakunci%")
             ->orWhere('snippet', 'like', "%$katakunci%")
                 ->paginate($jumlahbaris);
         } else{

@@ -62,6 +62,7 @@
                                     <th>Nama Toko</th>
                                     <th>Alamat</th>
                                     <th>Snippet</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -75,6 +76,7 @@
                                         <td>{{ $item->title }}</td>
                                         <td>{{ $item->alamat }}</td>
                                         <td>{{ $item->snippet }}</td>
+                                        <td>@livewire('toko-status', ['model' => $item, 'field' => 'status'], key($toko->id))</td>
                                         <td>
                                             <a href='{{ route('toko.show', $item->id) }}' class="btn btn-warning btn-sm">Show</a>
                                             <a href='{{ url('toko/' . $item->id . '/edit') }}' class="btn btn-warning btn-sm">Edit</a>

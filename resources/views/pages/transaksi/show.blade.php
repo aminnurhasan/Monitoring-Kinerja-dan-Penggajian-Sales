@@ -44,19 +44,23 @@
                                 </tr>
                                 <tr>
                                     <th>Nama Toko</th>
-                                    <td>{{ $transaksi->tokoName }}</td>
+                                    <td>{{ $transaksi->transaksi->tokoName }}</td>
                                 </tr>
                                 <tr>
                                     <th>Nama Karyawan</th>
-                                    <td>{{ $transaksi->salesName }}</td>
+                                    <td>{{ $transaksi->transaksi->salesName }}</td>
                                 </tr>
                                 <tr>
                                     <th>Quantity</th>
-                                    <td>{{ $transaksi->quantity }} Packs</td>
+                                    <td>{{ $transaksi->transaksi->quantity }} Packs</td>
                                 </tr>
                                 <tr>
                                     <th>Total Penjualan</th>
-                                    <td>Rp. {{ number_format($transaksi->totalPrice) }}</td>
+                                    <td>Rp. {{ number_format($transaksi->transaksi->totalPrice) }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Foto Presensi</th>
+                                    <td><img width="350" src="{{ asset('/storage/transaksi/' . $transaksi->fotosales) }}" alt=""></td>
                                 </tr>
                             </tbody>
                         </table>

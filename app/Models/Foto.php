@@ -10,4 +10,8 @@ class Foto extends Model
     use HasFactory;
 
     protected $table = 'foto';
+
+    public function transaksi(){
+        return $this->belongsTo(Transaksi::class);
+    }
 }
