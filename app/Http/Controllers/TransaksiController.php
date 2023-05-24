@@ -20,18 +20,7 @@ class TransaksiController extends Controller
 
     public function index(Request $request)
     {
-        $katakunci = $request->katakunci;
-        $jumlahbaris = 10;
-        $transaksi = Transaksi::with('foto');
-        if(strlen($katakunci)){
-            $transaksi = Transaksi::where('tokoName', 'like', "%$katakunci%")
-                ->orWhere('salesName', 'like', "%$katakunci%")
-                ->orWhere('quantity', 'like', "%$katakunci%")
-                ->orWhere('totalPrice', 'like', "%$katakunci%")
-                ->paginate($jumlahbaris);
-        } else{
-            $transaksi = Transaksi::orderBy('id', 'asc')->paginate($jumlahbaris);
-        }
+        $transaksi = Transaksi::all();
         return view('pages.transaksi.index', compact("transaksi"));
     }
 

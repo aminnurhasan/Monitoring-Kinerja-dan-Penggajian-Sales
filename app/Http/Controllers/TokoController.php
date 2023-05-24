@@ -20,19 +20,7 @@ class TokoController extends Controller
 
     public function index(Request $request)
     {
-        $katakunci = $request->katakunci;
-        $jumlahbaris = 10;
-        $toko = Toko::with('user');
-        // $namaSales = $request->toko->user->name;
-        if($katakunci){
-            $toko = $toko->where('title', 'like', "%$katakunci%")
-            // ->orWhere("$namaSales", 'like', "%$katakunci%")
-            ->orWhere('alamat', 'like', "%$katakunci%")
-            ->orWhere('snippet', 'like', "%$katakunci%")
-                ->paginate($jumlahbaris);
-        } else{
-            $toko = Toko::orderBy('id', 'asc')->paginate($jumlahbaris);
-        }
+        $toko = Toko::all();
         return view('pages.toko.index', compact("toko"));
     }
 

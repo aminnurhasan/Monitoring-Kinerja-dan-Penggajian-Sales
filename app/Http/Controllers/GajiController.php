@@ -21,19 +21,7 @@ class GajiController extends Controller
 
     public function index(Request $request)
     {
-        $katakunci = $request->katakunci;
-        $jumlahbaris = 10;
-        $gaji = Gaji::with('user', 'transaksi');
-        // $namaSales = $request->toko->user->name;
-        if($katakunci){
-            $gaji = $gaji->where('title', 'like', "%$katakunci%")
-            // ->orWhere("$namaSales", 'like', "%$katakunci%")
-            ->orWhere('alamat', 'like', "%$katakunci%")
-            ->orWhere('snippet', 'like', "%$katakunci%")
-                ->paginate($jumlahbaris);
-        } else{
-            $gaji = Gaji::orderBy('id', 'asc')->paginate($jumlahbaris);
-        }
+        $gaji = Gaji::all();
         return view('pages.gaji.index', compact("gaji"));
     }
 
