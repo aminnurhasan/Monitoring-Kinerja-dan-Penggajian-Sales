@@ -1,5 +1,5 @@
 /*!
- *   AdminLTE v3.0.5
+ *   AdminLTE v3.0.4
  *     Only Extra Components
  *   Author: Colorlib
  *   Website: AdminLTE.io <http://adminlte.io>
@@ -134,7 +134,6 @@
   min-height: 80px;
   padding: .5rem;
   position: relative;
-  width: 100%;
 }
 
 .info-box .progress {
@@ -162,17 +161,12 @@
 }
 
 .info-box .info-box-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  line-height: 120%;
   flex: 1;
-  padding: 0 10px;
+  padding: 5px 10px;
 }
 
 .info-box .info-box-number {
   display: block;
-  margin-top: .25rem;
   font-weight: 700;
 }
 
@@ -682,13 +676,13 @@
 }
 
 .direct-chat-primary .right > .direct-chat-text {
-  background: #5BC0BE;
-  border-color: #5BC0BE;
+  background: #007bff;
+  border-color: #007bff;
   color: #ffffff;
 }
 
 .direct-chat-primary .right > .direct-chat-text::after, .direct-chat-primary .right > .direct-chat-text::before {
-  border-left-color: #5BC0BE;
+  border-left-color: #007bff;
 }
 
 .direct-chat-secondary .right > .direct-chat-text {
@@ -822,13 +816,13 @@
 }
 
 .direct-chat-blue .right > .direct-chat-text {
-  background: #5BC0BE;
-  border-color: #5BC0BE;
+  background: #007bff;
+  border-color: #007bff;
   color: #ffffff;
 }
 
 .direct-chat-blue .right > .direct-chat-text::after, .direct-chat-blue .right > .direct-chat-text::before {
-  border-left-color: #5BC0BE;
+  border-left-color: #007bff;
 }
 
 .direct-chat-indigo .right > .direct-chat-text {

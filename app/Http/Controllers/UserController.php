@@ -22,17 +22,7 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $katakunci = $request->katakunci;
-        $jumlahbaris = 10;
         $user = User::all();
-        if(strlen($katakunci)){
-            $user = User::where('id', 'like', "%$katakunci%")
-                ->orWhere('name', 'like', "%$katakunci%")
-                ->orWhere('email', 'like', "%$katakunci%")
-                ->paginate($jumlahbaris);
-        } else{
-            $user = User::orderBy('id', 'asc')->paginate($jumlahbaris);
-        }
         return view('pages.user.index', compact("user"));
     }
 

@@ -33,14 +33,6 @@
                     {{ session('status') }}
                 </div>
                 @endif
-
-                <div class="pb-3">
-                    <form class="d-flex" action="{{ url('transaksi') }}" method="get">
-                        <input class="form-control m-1" type="search" name="katakunci"
-                            value="{{ Request::get('katakunci') }}" placeholder="Cari" aria-label="Search">
-                        <button class="btn btn-secondary m-1" type="submit">Cari</button>
-                    </form>
-                </div>
                 
                 <div class="card">
                     <div class="card-header">
@@ -52,10 +44,9 @@
                     <!-- /.card-header -->
                     <div class="card-body">
 
-                        <table class="table">
+                        <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>No</th>
                                     <th>Nama Toko</th>
                                     <th>Nama Karyawan</th>
                                     <th>Quantity</th>
@@ -63,12 +54,8 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                                <?php
-                                    $no = $transaksi->firstItem();
-                                ?>
                                 @foreach ($transaksi as $item)
                                     <tr>
-                                        <td>{{ $no }}</td>
                                         <td>{{ $item->tokoName }}</td>
                                         <td>{{ $item->salesName }}</td>
                                         <td>{{ $item->quantity }} Packs</td>
@@ -83,7 +70,6 @@
                                             </form>
                                         </td>
                                     </tr>
-                                    <?php $no++; ?>
                                 @endforeach
                             </tbody>
                         </table>

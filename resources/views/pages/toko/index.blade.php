@@ -35,14 +35,6 @@
                 @endif
 
                 <a href="{{ route('toko.create') }}" class="btn btn-sm btn-primary mb-2">Add</a>
-
-                <div class="pb-3">
-                    <form class="d-flex" action="{{ url('toko') }}" method="get">
-                        <input class="form-control m-1" type="search" name="katakunci"
-                            value="{{ Request::get('katakunci') }}" placeholder="Cari" aria-label="Search">
-                        <button class="btn btn-secondary m-1" type="submit">Cari</button>
-                    </form>
-                </div>
                 
                 <div class="card">
                     <div class="card-header">
@@ -54,10 +46,9 @@
                     <!-- /.card-header -->
                     <div class="card-body">
 
-                        <table class="table">
+                        <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>No</th>
                                     <th>Nama Sales</th>
                                     <th>Nama Toko</th>
                                     <th>Alamat</th>
@@ -65,13 +56,9 @@
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
-                            </thead>
-                                <?php
-                                    $no = $toko->firstItem();
-                                ?>
+                            </thead>                                
                                 @foreach ($toko as $item)
                                     <tr>
-                                        <td>{{ $no }}</td>
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->title }}</td>
                                         <td>{{ $item->alamat }}</td>
@@ -88,7 +75,6 @@
                                             </form>
                                         </td>
                                     </tr>
-                                    <?php $no++; ?>
                                 @endforeach
                             </tbody>
                         </table>
@@ -104,22 +90,3 @@
 </section>
 
 @endsection
-
-{{-- @push('scripts')
-<script>
-    $(document).ready(function() {
-        $('#datatable').DataTable({
-            processing: true,
-            serverSide: true,
-            responsive: true,
-            ajax: '{{ url("user") }}',
-            columns: [
-                {data: 'id', name: 'id'},
-                {data: 'name', name: 'name'},
-                {data: 'email', name: 'email'},
-                {data: 'action', name: 'action', orderable: false, searchable: false}
-            ]
-        });
-    });
-</script>
-@endpush --}}
