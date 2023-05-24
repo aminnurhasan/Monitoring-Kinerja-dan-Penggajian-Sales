@@ -81,7 +81,7 @@
     <!-- Chartisan -->
     <script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script>
 
-    @livewireScripts
     @stack('scripts')
+    @livewireScripts
 </body>
 </html>

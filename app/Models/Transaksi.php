@@ -20,4 +20,8 @@ class Transaksi extends Model
     public function foto(){
         return $this->hasOne(Foto::class);
     }
+
+    public function gaji(){
+        return $this->belongsToMany(Gaji::class);
+    }
 }

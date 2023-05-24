@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Toko::class);
     }
+
+    public function gaji()
+    {
+        return $this->hasMany(Gaji::class);
+    }
 }
