@@ -51,7 +51,7 @@ class UserController extends Controller
             $request['foto'] = $this->uploadImage($foto, $request->name, 'profile');
         }
 
-        $request['password'] = $request->password;
+        $request['password'] = Hash::make($request->password);
 
         User::create($request->all());
 
@@ -99,7 +99,7 @@ class UserController extends Controller
         }
 
         if ($request->password) {
-            $request['password'] = $request->password;
+            $request['password'] = Hash::make($request->password);
         } else {
             $request['password'] = $user->password;
         }

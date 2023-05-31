@@ -10,11 +10,16 @@ class Gaji extends Model
     use HasFactory;
     protected $table = 'gaji';
     public $timestamps = false;
-
+    protected $casts = [
+        'tglAwal' => 'date',
+        'tglAkhir' => 'date',
+    ];
+    
     protected $fillable = [
         'user_id',
         'transaksi_id',
-        'bulan',
+        'tglAwal',
+        'tglAkhir',
         'totalPenjualan',
         'gaji'
     ];

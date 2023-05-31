@@ -22,6 +22,17 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
 
+    <!-- Theme Style -->
+    <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}" />
+
+    {{-- <link href="{{ mix('css/app.css') }}" rel="stylesheet"> --}}
+
+    <!-- Date Range Picker -->
+    {{-- <link rel="stylesheet" href="{{ asset('assets/plugins/daterangepicker/daterangepicker.css') }}"/> --}}
+
+    {{-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css"> --}}
+
     @livewireStyles
 </head>
 <body class="hold-transition sidebar-mini">
@@ -67,16 +78,17 @@
   </div>
   <!-- ./wrapper -->
 
-
     <!-- Scripts -->    
     <!-- jQuery -->
     <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <!-- Bootstrap 4 -->
     <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('assets/dist/js/demo.js') }}"></script>
 
     <!-- DATATABLES -->
     <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
@@ -84,10 +96,27 @@
     <script src="{{ asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
     <script src="{{ asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
 
+    <!-- Switch -->
+    <script src="{{ asset('assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script>
+
+    {{-- <script src="{{ mix('js/app.js') }}"></script> --}}
+
+    <!-- Date Range Picker -->
+    {{-- <script src="{{ asset('assets/plugins/daterangepicker/daterangepicker.js') }}"></script> --}}
+
     <!-- Charting library -->
-    <script src="https://unpkg.com/echarts/dist/echarts.min.js"></script>
+    {{-- <script src="https://unpkg.com/echarts/dist/echarts.min.js"></script> --}}
     <!-- Chartisan -->
-    <script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script>
+    {{-- <script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script> --}}
+
+    {{-- <script type="text/javascript">
+        $(document).ready(function(){
+
+            // Format mata uang.
+            $( '.gajiPokok' ).mask('000.000.000', {reverse: true});
+
+        })
+    </script> --}}
 
     <script>
       $(function () {
@@ -95,21 +124,127 @@
           "responsive": true,
           "autoWidth": false,
         });
-        $('#example2').DataTable({
-          "paging": true,
-          "lengthChange": false,
-          "searching": false,
-          "ordering": true,
-          "info": true,
-          "autoWidth": false,
-          "responsive": true,
-        });
+
+        // $("#reservation").daterangepicker();
+
+      //   $(document).ready(function() {
+      //     $('#datepicker').datepicker({
+      //         format: 'yyyy-mm-dd', // Format tampilan tanggal
+      //         autoclose: true, // Menutup datepicker setelah pemilihan tanggal
+      //         todayHighlight: true, // Mencetak tanggal hari ini
+      //     });
+      // });
+
       });
-      
-      $("input[data-bootstrap-switch]").each(function(){
-        $(this).bootstrapSwitch('state', $(this).prop('checked'));
+
+      $('.tanggalAwal').datepicker({
+          format: 'yyyy-mm-dd',
       });
+      $('.tanggalAkhir').datepicker({
+          format: 'yyyy-mm-dd',
+      });
+
+      // $( ".tanggalAwal" ).datepicker({
+      //   dateFormat: "yyyy-mm-dd"
+      // }); 
+      // $( ".tanggalAkhir" ).datepicker({
+      //   dateFormat: "yyyy-mm-dd"
+      // }); 
+        
+        // $("#date").datepicker();
+
+        // $("#datepicker").datepicker();
     </script>
+    {{-- <script type="text/javascript">
+          $(document).ready(function(){
+
+              // Format mata uang.
+              $( '.uang' ).mask('000.000.000', {reverse: true});
+
+          })
+      </script> --}}
+
+    {{-- <script type="text/javascript">
+		
+      var gajiPokok = document.getElementById('gajiPokok');
+      gajiPokok.addEventListener('keyup', function(e){
+        // tambahkan 'Rp.' pada saat form di ketik
+        // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+        gajiPokok.value = formatRupiah(this.value, 'Rp. ');
+      });
+  
+      /* Fungsi formatRupiah */
+      function formatRupiah(angka, prefix){
+        var number_string = angka.replace(/[^,\d]/g, '').toString(),
+        split   		= number_string.split(','),
+        sisa     		= split[0].length % 3,
+        gajiPokok     		= split[0].substr(0, sisa),
+        ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+  
+        // tambahkan titik jika yang di input sudah menjadi angka ribuan
+        if(ribuan){
+          separator = sisa ? '.' : '';
+          gajiPokok += separator + ribuan.join('.');
+        }
+  
+        gajiPokok = split[1] != undefined ? gajiPokok + ',' + split[1] : gajiPokok;
+        return prefix == undefined ? gajiPokok : (gajiPokok ? 'Rp. ' + gajiPokok : '');
+      }
+    </script> --}}
+
+    {{-- <script type="text/javascript">
+		
+      var bonusInsentif = document.getElementById('bonusInsentif');
+      bonusInsentif.addEventListener('keyup', function(e){
+        // tambahkan 'Rp.' pada saat form di ketik
+        // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+        bonusInsentif.value = formatRupiah(this.value, 'Rp. ');
+      });
+  
+      /* Fungsi formatRupiah */
+      function formatRupiah(angka, prefix){
+        var number_string = angka.replace(/[^,\d]/g, '').toString(),
+        split   		= number_string.split(','),
+        sisa     		= split[0].length % 3,
+        bonusInsentif     		= split[0].substr(0, sisa),
+        ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+  
+        // tambahkan titik jika yang di input sudah menjadi angka ribuan
+        if(ribuan){
+          separator = sisa ? '.' : '';
+          bonusInsentif += separator + ribuan.join('.');
+        }
+  
+        bonusInsentif = split[1] != undefined ? bonusInsentif + ',' + split[1] : bonusInsentif;
+        return prefix == undefined ? bonusInsentif : (bonusInsentif ? 'Rp. ' + bonusInsentif : '');
+      }
+    </script> --}}
+
+    {{-- <script>
+        document.getElementById('tanggalAwal').addEventListener('change', function() {
+            var inputDate = this.value;
+            var formattedDate = formatDate(inputDate);
+            this.value = formattedDate;
+        });
+
+        function formatDate(date) {
+            var dateObj = new Date(date);
+            var day = dateObj.getDate();
+            var month = dateObj.getMonth() + 1;
+            var year = dateObj.getFullYear();
+
+            // Menambahkan angka 0 di depan tanggal dan bulan jika hanya satu digit
+            if (day < 10) {
+                day = '0' + day;
+            }
+            if (month < 10) {
+                month = '0' + month;
+            }
+
+            var formattedDate = year + '-' + month + '-' + day;
+            return formattedDate;
+        }
+    </script> --}}
 
     @stack('scripts')
     @livewireScripts

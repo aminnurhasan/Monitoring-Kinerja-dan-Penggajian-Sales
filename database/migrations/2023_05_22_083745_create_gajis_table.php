@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('transaksi_id');
-            $table->string('bulan');
+            $table->date('tglAwal');
+            $table->date('tglAkhir');
             $table->integer('totalPenjualan');
             $table->integer('gaji');
 
