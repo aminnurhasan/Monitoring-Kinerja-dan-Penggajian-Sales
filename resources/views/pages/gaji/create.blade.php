@@ -32,12 +32,11 @@
                 </div>
                 @endif
 
-
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
                             <i class="ion ion-clipboard mr-1"></i>
-                            Insentif
+                            Generate Gaji Bulanan Sales
                         </h3>
                     </div>
                     <!-- /.card-header -->
@@ -45,115 +44,77 @@
 
                         <form action="{{ route('gaji.create') }}" method="get" enctype="multipart/form-data">
                             @csrf
-                            <div class="form-group">
-                                <label for="">Nama Sales</label>
-                                    <select name="user_id" class="form-control">
-                                        @foreach ($user as $user)
-                                            <option name="user_id" value="{{ $user->id }}">{{ $user->name }}</option>
-                                        @endforeach
+                            <div class="form-group row">
+                                <div class="col">
+                                    <label for="">Bulan</label>
+                                    <select name="bulan" class="form-control">
+                                        {{-- @foreach ($bulan as $item) --}}
+                                            <option name="bulan" value="1">Januari</option>
+                                            <option name="bulan" value="2">Februari</option>
+                                            <option name="bulan" value="3">Maret</option>
+                                            <option name="bulan" value="4">April</option>
+                                            <option name="bulan" value="5">Mei</option>
+                                            <option name="bulan" value="6">Juni</option>
+                                            <option name="bulan" value="7">Juli</option>
+                                            <option name="bulan" value="8">Agustus</option>
+                                            <option name="bulan" value="9">September</option>
+                                            <option name="bulan" value="10">Oktober</option>
+                                            <option name="bulan" value="11">November</option>
+                                            <option name="bulan" value="12">Desember</option>
+                                        {{-- @endforeach --}}
                                     </select>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col">
-                                    <label for="">Gaji Pokok Bulanan</label>
-                                    <input type="number" name="gajiPokok" class="form-control">
                                 </div>
                                 <div class="col">
-                                    <label for="">Tanggal Awal</label>
-                                    <input type="text" name="tanggalAwal" class="form-control" placeholder="yyyy-mm-dd">
+                                    <label for="">Tahun</label>
+                                    <input type="number" class="form-control" name="tahun" value="2023">
                                 </div>
                             </div>
-                            
-
-                            <div class="form-group row">
-                                <div class="col">
-                                    <label for="">Bonus Insentif Per Kunjungan</label>
-                                    <input type="number" name="bonusKunjungan" class="form-control">
-                                </div>
-                                <div class="col">
-                                    <label for="">Tanggal Akhir</label>
-                                    <input type="text" name="tanggalAkhir" class="form-control" placeholder="yyyy-mm-dd">
-                                </div>
-                            </div>
-
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary form-control">Tampilkan Detail</button>
+                                <button type="submit" class="btn btn-primary form-control">Render Gaji Sales</button>
                             </div>
                         </form>
-
                     </div>
                 </div>
-                <div class="card">
+
+                <div class="card">  
                     <div class="card-header">
                         <h3 class="card-title">
                             <i class="ion ion-clipboard mr-1"></i>
-                            Gaji Sales
+                            Gaji Bulanan Sales
                         </h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-
                         <form action="{{ route('gaji.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
-                            <div class="form-group row">
-                                <div class="col">
-                                    <label>Nama Sales</label>
-                                    <input type="text" class="form-control" disabled value="{{$nama}}">            
-                                </div>
-                                <div class="col">
-                                    <label>Tanggal Awal</label>
-                                    <input type="text" class="form-control" disabled value="{{$tanggalAwal}}">        
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col">
-                                    <label>Gaji Pokok</label>
-                                    <input type="text" class="form-control" disabled value="Rp. {{number_format($gajiPokok, 0, ',', '.')}}">            
-                                </div>
-                                <div class="col">
-                                    <label>Tanggal Akhir</label>
-                                    <input type="text" class="form-control" disabled value="{{$tanggalAkhir}}">        
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                @foreach ($totalKunjungan as $kunjungan)
-                                    <div class="col">
-                                        <label>Total Kunjungan</label>
-                                        <input type="text" class="form-control" disabled value="{{$kunjungan->kunjungan}} Kunjungan">        
-                                    </div>
-                                    <div class="col">
-                                        <label>Total Insentif Kunjungan</label>
-                                        <input type="text" class="form-control" disabled value="Rp. {{number_format($totalInsentifKunjungan, 0, ',', '.')}}">
-                                    </div>
-                                @endforeach
-                            </div>
-                            <div class="form-group row">
-                                <div class="col">
-                                    <label>Total Quantity</label>
-                                    <input type="text" class="form-control" disabled value="{{$quantitySales}} Packs">        
-                                </div>
-                                <div class="col">
-                                    <label>Total Penjualan</label>
-                                    <input type="text" class="form-control" disabled value="Rp. {{number_format($penjualanSales, 0, ',', '.')}}">        
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col">
-                                    <label>Bonus Penjualan</label>
-                                    <input type="text" class="form-control" disabled value="Rp. {{number_format($bonusPenjualan, 0, ',', '.')}}">        
-                                </div>
-                                <div class="col">
-                                    <label>Total Gaji</label>
-                                    <input type="text" class="form-control" disabled value="Rp. {{number_format($totalGaji, 0, ',', '.')}}">        
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary form-control">Simpan Gaji Sales</button>
+                            <table id="example1" class="table table-bordered table-striped ">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Sales</th>
+                                        <th>Gaji Pokok</th>
+                                        <th>Insentif Kunjungan</th>
+                                        <th>Bonus Penjualan</th>
+                                        <th>Total Gaji</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($totalGaji as $item)
+                                        <tr>
+                                            <td>{{ $item->nama }}</td>
+                                            <td>Rp. {{ number_format($item->gapok, 0, ',', '.') }}</td>
+                                            <td>Rp. {{ number_format($item->insentifKunjungan, 0, ',', '.') }}</td>
+                                            <td>Rp. {{ number_format(intval($item->bonusPenjualan), 0, ',', '.') }}</td>
+                                            <td>Rp. {{ number_format(intval($item->totalGaji), 0, ',', '.') }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <div class="form-group mt-3">
+                                <button type="submit" class="btn btn-primary form-control">Simpan Data Gaji Sales</button>
                             </div>
                         </form>
-
                     </div>
-                </div>
+                </div>       
                 <!-- /.card -->
             </section>
             <!-- /.Left col -->

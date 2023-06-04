@@ -24,7 +24,70 @@ class GajiController extends Controller
     public function index(Request $request)
     {
         $gaji = Gaji::all();
-        return view('pages.gaji.index', compact("gaji"));
+
+        $bulanGaji = '';
+        // if($gaji->bulan == 1){
+        //     $bulanGaji = 'Januari';
+        //     return $bulanGaji;
+        // }else if($gaji->bulan == 2){
+        //     $bulanGaji = 'Februari';
+        //     return $bulanGaji;
+        // }else if($gaji->bulan == 3){
+        //     $bulanGaji = 'Maret';
+        //     return $bulanGaji;
+        // }else if($gaji->bulan == 4){
+        //     $bulanGaji = 'April';
+        //     return $bulanGaji;
+        // }else if($gaji->bulan == 5){
+        //     $bulanGaji = 'Mei';
+        //     return $bulanGaji;
+        // }else if($gaji->bulan == 6){
+        //     $bulanGaji = 'Juni';
+        //     return $bulanGaji;
+        // }else if($gaji->bulan == 7){
+        //     $bulanGaji = 'Juli';
+        //     return $bulanGaji;
+        // }else if($gaji->bulan == 8){
+        //     $bulanGaji = 'Agustus';
+        //     return $bulanGaji;
+        // }else if($gaji->bulan == 9){
+        //     $bulanGaji = 'September';
+        //     return $bulanGaji;
+        // }else if($gaji->bulan == 10){
+        //     $bulanGaji = 'Oktober';
+        //     return $bulanGaji;
+        // }else if($gaji->bulan == 11){
+        //     $bulanGaji = 'November';
+        //     return $bulanGaji;
+        // }else if($gaji->bulan == 12){
+        //     $bulanGaji = 'Desember';
+        //     return $bulanGaji;
+        // }
+
+        // $gajiPokok = DB::table('user')
+        //     ->select('id', 'name', 'gajiPokok')
+        //     ->where('is_admin', 0)
+        //     ->get();
+
+        // Jumlah Kunjungan Sales Perbulan
+        // $kunjunganSales = DB::table('transaksi')
+        //     ->select('user.id', 'user.name', DB::raw('COUNT(*) as kunjungan'))
+        //     ->join('user', 'transaksi.user_id', '=', 'user.id')
+        //     ->whereMonth('waktu', $inputBulan)
+        //     ->whereYear('waktu', $inputTahun)
+        //     ->groupBy('user.id', 'user.name')
+        //     ->get();
+
+        // Total Quantity dan Total Penjualan Sales Perbulan
+        // $penjualanSales = DB::table('transaksi')
+        //     ->select('user.id', 'user.name', DB::raw('SUM(transaksi.quantity) as totalQuantity'), DB::raw('SUM(transaksi.totalPrice) as totalPenjualan'))
+        //     ->join('user', 'transaksi.user_id', '=', 'user.id')
+        //     ->whereMonth('waktu', $inputBulan)
+        //     ->whereYear('waktu', $inputTahun)
+        //     ->groupBy('user.id', 'user.name')
+        //     ->get();
+            
+        return view('pages.gaji.index', compact('gaji'));
     }
 
     /**
@@ -32,89 +95,163 @@ class GajiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    private $inputBulan;
+    private $inputTahun;
+
     public function create(Request $request)
     {
-        $user = User::all();
-        $tanggalAwal = $request->input('tanggalAwal');
-        $tanggalAkhir = $request->input('tanggalAkhir');
-        $gajiPokok = $request->input('gajiPokok');
-        $bonusKunjungan = $request->input('bonusKunjungan');
+        $gaji = Gaji::all();
+        $this->inputBulan = $request->input('bulan');
+        $this->inputTahun = $request->input('tahun');
 
-        $idSales = $request->input('user_id');
+        $totalGaji = DB::select(DB::raw('
+            SELECT id_user, nama, gapok, insentifKunjungan, bonusPenjualan, SUM(gapok + insentifKunjungan + bonusPenjualan) as totalGaji
+            FROM (
+                SELECT user.id AS id_user, user.name AS nama, user.gajiPokok AS gapok, COUNT(transaksi.user_id) * 10000 AS insentifKunjungan, 	
+                SUM(transaksi.totalPrice) * 0.05 AS bonusPenjualan
+                FROM user
+                JOIN transaksi ON user.id = transaksi.user_id
+                WHERE user.is_admin = 0
+                AND EXTRACT(MONTH FROM transaksi.waktu) = :inputBulan
+                AND EXTRACT(YEAR FROM transaksi.waktu) = :inputTahun
+                GROUP BY user.id, user.name, user.gajiPokok
+            )as subquery
+            GROUP BY id_user, nama, insentifKunjungan, bonusPenjualan, gapok
+        '), ['inputBulan' => $this->inputBulan, 'inputTahun' => $this->inputTahun]);
 
-        $namaSales = DB::table('user')
-            ->join('transaksi', 'user.id', '=', 'transaksi.user_id')
-            ->select('user.name as nama')
-            ->where('user.id', '=', $idSales)
-            ->get();
+        // // Query Gaji Pokok Sales
+        // $gajiPokokSales = DB::select(DB::raw('
+        //     SELECT id as id_sales, name as nama, gajiPokok as gapok
+        //     FROM user
+        //     WHERE is_admin = 0
+        // '));
 
-        // Query Total Quantity dan Total Penjualan Sales
-        $totalPenjualan = DB::table('transaksi')
-            ->select('salesName as nama', DB::raw('SUM(quantity) as totalQuantity'), DB::raw('SUM(totalPrice) as totalPenjualan'))
-            ->where('user_id', '=', $idSales)
-            ->whereBetween('waktu', [$tanggalAwal, $tanggalAkhir])
-            ->groupBy('salesName')
-            ->get();
-        
-        // Query Total Kunjungan Sales
-        $totalKunjungan = DB::table('transaksi')
-            ->select(DB::raw('COUNT(*) as kunjungan'))
-            ->where('user_id', '=', $idSales)
-            ->get();
+        // // Query Kunjungan Sales Perbulan
+        // $kunjunganSales = DB::select(DB::raw('
+        //     SELECT user.id as id_sales, user.name AS nama, COUNT(*) AS kunjungan
+        //     FROM user
+        //     JOIN transaksi ON user.id = transaksi.user_id
+        //     WHERE EXTRACT(MONTH FROM transaksi.waktu) = :inputBulan
+        //     AND EXTRACT(YEAR FROM transaksi.waktu) = :inputTahun
+        //     GROUP BY user.id, user.name
+        // '), ['inputBulan' => $inputBulan, 'inputTahun' => $inputTahun]);
 
-        $nama = "";
-        foreach ($namaSales as $namaSales){
-            $nama = $namaSales->nama;
-        }
+        // //Query Total Quantity dan Total Penjualan Sales Perbulan
+        // $penjualanSales = DB::select(DB::raw('
+        //     SELECT user.id as id_sales, user.name as nama, SUM(transaksi.quantity) AS totalQuantity, SUM(transaksi.totalPrice) AS totalPenjualan
+        //     FROM user
+        //     JOIN transaksi ON user.id = transaksi.user_id
+        //     WHERE EXTRACT(MONTH FROM transaksi.waktu) = :inputBulan
+        //     AND EXTRACT(YEAR FROM transaksi.waktu) = :inputTahun
+        //     GROUP BY user.id, user.name
+        // '), ['inputBulan' => 5, 'inputTahun' => 2023]);
 
-        // Perhitungan Total Insentif Kunjungan Sales
-        $insentifKunjungan = 0;
-        foreach ($totalKunjungan as $kunjungan){
-            $insentifKunjungan += $kunjungan->kunjungan;
-        }
-        
-        $totalInsentifKunjungan = $insentifKunjungan * $bonusKunjungan;
+        // $gaji = DB::select(DB::raw('
+        //     SELECT u.id as id_user, u.name as nama, u.gajiPokok, COUNT(t.user_id) * 10000 as insentifKunjungan, 
+        // '));
 
-        // Perhitungan Bonus Penjualan Sales
-        $penjualanSales = 0;
-        $quantitySales = 0;
-        foreach ($totalPenjualan as $penjualan){
-            $penjualanSales += $penjualan->totalPenjualan;
-            $quantitySales += $penjualan->totalQuantity;
-        }
+        // $bonusKunjungan = [];
+        // $totalQuantity = [];
+        // $bonusPenjualan = [];
+        // foreach ($kunjunganSales as $kunjungan){
+        //     $bonusKunjungan[$kunjungan->id_sales] = $kunjungan->kunjungan * $bonusPerKunjungan;
+        // }
 
-        $bonusPenjualan = 0.05 * $penjualanSales;
+        // foreach ($penjualanSales as $penjualan){
+        //     $totalQuantity[$penjualan->id_sales] = $penjualan->totalQuantity;
+        //     $bonusPenjualan[$penjualan->id_sales] = $penjualan->totalPenjualan * 0.5;
+        // }
 
-        // Perhitungan Total Gaji Sales
-        $totalGaji = $gajiPokok + $totalInsentifKunjungan + $bonusPenjualan;
+        // foreach ($gajiPokokSales as $gaji){
+        //     // $idSales = $gaji->id_sales;
+        //     $nama = $gaji->nama;
+        //     $gajiPokok = $gaji->gapok;
+        //     // $jumlahKunjungan = $totalKunjungan;
+        //     $bonusKunjungan = $bonusKunjungan;
+        //     $jumlahQuantity = $totalQuantity;
+        //     // $jumlahPenjualan = $totalPenjualan;
+        //     $bonuPenjualan = $bonusPenjualan;
+        //     // $gajiTotal = $gajiPokok + $bonusKunjungan + $bonuPenjualan;
 
-        return view('pages.gaji.create', compact('user', 'nama', 'penjualanSales', 'gajiPokok', 'tanggalAwal', 'tanggalAkhir', 'quantitySales', 'totalKunjungan', 'totalInsentifKunjungan', 'bonusPenjualan', 'totalGaji'));
-    }
-
-    // public function perhitungan(Request $request)
-    // {
-    //     $idSales = $request->user_id;
-    //     $namaSales = DB::table('user')
-    //         ->join('transaksi', 'user.id', '=', 'transaksi.user_id')
-    //         ->select('user.name as nama')
-    //         ->where('user.id', '=', $idSales)
-    //         ->get();
-        
-    //     $data = $namaSales->pluck('nama')->map(function ($item){
-    //         $modifiedItem = str_replace('nama', '', $item);
+        //     // $hasilAkhir[] = $hasil;
             
-    //         return $modifiedItem;
-    //     });
+        // }
 
-    //     $totalPenjualan = DB::table('transaksi')
-    //         ->select('salesName as nama', DB::raw('SUM(quantity) as totalQuantity'), DB::raw('SUM(totalPrice) as totalPenjualan'))
-    //         ->where('user_id', '=', $idSales)
-    //         ->whereBetween('waktu', ['2023-05-01', '2023-05-30'])
-    //         ->groupBy('salesName')
-    //         ->get();
+        // foreach ($gajiPokokSales as $gaji){
+        //     $hasil = [
+        //         'idSales' => $gaji->id_sales,
+        //         'nama' => $gaji->nama,
+        //         'gajiPokok' => $gaji->gapok,
+        //         'jumlahKunjungan' => $totalKunjungan,
+        //         'bonusKunjungan' => $totalKunjungan * $bonusPerKunjungan,
+        //         'jumlahQuantity' => $totalQuantity,
+        //         'jumlahPenjualan' => $totalPenjualan,
+        //         'bonuPenjualan' => $totalPenjualan * 0.05,
+        //         'gajiTotal' => $gajiPokok + $bonusKunjungan + $bonuPenjualan
+        //     ];
+
+        //     $hasilAkhir[] = $hasil;
+            
+        // }
+        // dd($totalGaji);
+
+        return view('pages.gaji.create', ['totalGaji' => $totalGaji], compact('gaji'));
+        // $user = User::all();
+        // $tanggalAwal = $request->input('tanggalAwal');
+        // $tanggalAkhir = $request->input('tanggalAkhir');
+        // $gajiPokok = $request->input('gajiPokok');
+        // $bonusKunjungan = $request->input('bonusKunjungan');
+
+        // $idSales = $request->input('user_id');
+
+        // $namaSales = DB::table('user')
+        //     ->join('transaksi', 'user.id', '=', 'transaksi.user_id')
+        //     ->select('user.name as nama')
+        //     ->where('user.id', '=', $idSales)
+        //     ->get();
+
+        // // Query Total Quantity dan Total Penjualan Sales
+        // $totalPenjualan = DB::table('transaksi')
+        //     ->select('salesName as nama', DB::raw('SUM(quantity) as totalQuantity'), DB::raw('SUM(totalPrice) as totalPenjualan'))
+        //     ->where('user_id', '=', $idSales)
+        //     ->whereBetween('waktu', [$tanggalAwal, $tanggalAkhir])
+        //     ->groupBy('salesName')
+        //     ->get();
         
-    //     return view('pages.gaji.create', compact('totalPenjualan'));
-    // }
+        // // Query Total Kunjungan Sales
+        // $totalKunjungan = DB::table('transaksi')
+        //     ->select(DB::raw('COUNT(*) as kunjungan'))
+        //     ->where('user_id', '=', $idSales)
+        //     ->get();
+
+        // $nama = "";
+        // foreach ($namaSales as $namaSales){
+        //     $nama = $namaSales->nama;
+        // }
+
+        // // Perhitungan Total Insentif Kunjungan Sales
+        // $insentifKunjungan = 0;
+        // foreach ($totalKunjungan as $kunjungan){
+        //     $insentifKunjungan += $kunjungan->kunjungan;
+        // }
+        
+        // $totalInsentifKunjungan = $insentifKunjungan * $bonusKunjungan;
+
+        // // Perhitungan Bonus Penjualan Sales
+        // $penjualanSales = 0;
+        // $quantitySales = 0;
+        // foreach ($totalPenjualan as $penjualan){
+        //     $penjualanSales += $penjualan->totalPenjualan;
+        //     $quantitySales += $penjualan->totalQuantity;
+        // }
+
+        // $bonusPenjualan = 0.05 * $penjualanSales;
+
+        // // Perhitungan Total Gaji Sales
+        // $totalGaji = $gajiPokok + $totalInsentifKunjungan + $bonusPenjualan;
+        // compact('user', 'nama', 'bulan', 'penjualanSales', 'gajiPokok', 'tanggalAwal', 'tanggalAkhir', 'quantitySales', 'totalKunjungan', 'totalInsentifKunjungan', 'bonusPenjualan', 'totalGaji')
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -124,6 +261,80 @@ class GajiController extends Controller
      */
     public function store(Request $request)
     {
+        $gaji = Gaji::all();
+        $inputBulan = $request->input('bulan');
+        $inputTahun = $request->input('tahun');
+
+        $totalGaji = DB::select(DB::raw('
+            SELECT id_user, nama, gapok, insentifKunjungan, bonusPenjualan, SUM(gapok + insentifKunjungan + bonusPenjualan) as totalGaji
+            FROM (
+                SELECT user.id AS id_user, user.name AS nama, user.gajiPokok AS gapok, COUNT(transaksi.user_id) * 10000 AS insentifKunjungan, 	
+                SUM(transaksi.totalPrice) * 0.05 AS bonusPenjualan
+                FROM user
+                JOIN transaksi ON user.id = transaksi.user_id
+                WHERE user.is_admin = 0
+                AND EXTRACT(MONTH FROM transaksi.waktu) = :inputBulan
+                AND EXTRACT(YEAR FROM transaksi.waktu) = :inputTahun
+                GROUP BY user.id, user.name, user.gajiPokok
+            )as subquery
+            GROUP BY id_user, nama, insentifKunjungan, bonusPenjualan, gapok
+        '), ['inputBulan' => $inputBulan, 'inputTahun' => $inputTahun]);
+
+        $bulan = $inputBulan;
+        if($inputBulan == 1 ){
+            $bulan = 'Januari';
+            return $bulan;
+        }else if($inputBulan == 2){
+            $bulan = 'Februari';
+            return $bulan;
+        }else if($inputBulan == 3){
+            $bulan = 'Maret';
+            return $bulan;
+        }else if($inputBulan == 4){
+            $bulan = 'April';
+            return $bulan;
+        }else if($inputBulan == 5){
+            $bulan = 'Mei';
+            return $bulan;
+        }else if($inputBulan == 6){
+            $bulan = 'Juni';
+            return $bulan;
+        }else if($inputBulan == 7){
+            $bulan = 'Juli';
+            return $bulan;
+        }else if($inputBulan == 8){
+            $bulan = 'Agustus';
+            return $bulan;
+        }else if($inputBulan == 9){
+            $bulan = 'September';
+            return $bulan;
+        }else if($inputBulan == 10){
+            $bulan = 'Oktober';
+            return $bulan;
+        }else if($inputBulan == 11){
+            $bulan = 'November';
+            return $bulan;
+        }else if($inputBulan == 12){
+            $bulan = 'Desember';
+            return $bulan;
+        };
+
+        foreach($totalGaji as $gaji){
+            foreach($bulan as $bulan){
+                Gaji::create([
+                    'user_id' => $gaji->id_user,
+                    'gajiPokok' => $gaji->gapok,
+                    'insentifKunjungan' => $gaji->insentifKunjungan,
+                    'bonusPenjualan' => $gaji->bonusPenjualan,
+                    'gajiTotal' => $gaji->totalGaji,
+                    'bulan' => $bulan,
+                    'tahun' => $inputTahun
+                ]);
+            }
+                
+        }
+        dd($totalGaji);
+        return view('pages.gaji.index', ['totalGaji' => $totalGaji], compact('gaji'));
         
     }
 

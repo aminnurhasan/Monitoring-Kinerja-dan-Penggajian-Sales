@@ -64,6 +64,10 @@
                                 <input type="password" name="password" class="form-control">
                             </div>
                             <div class="form-group">
+                                <label for="">Gaji Pokok</label>
+                                <input type="number" name="gajiPokok" class="form-control">
+                            </div>
+                            <div class="form-group">
                                 <label for="" style="display: block">Is Admin?</label>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" name="is_admin" type="radio" id="inlineRadio1" value="1">

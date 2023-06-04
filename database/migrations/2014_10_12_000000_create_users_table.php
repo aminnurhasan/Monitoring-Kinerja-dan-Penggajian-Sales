@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->integer('gajiPokok')->default(0);
             $table->boolean('is_admin')->nullable();
             $table->rememberToken();
             $table->timestamps();

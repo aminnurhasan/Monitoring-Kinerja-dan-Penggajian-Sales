@@ -56,7 +56,8 @@
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
-                            </thead>                                
+                            </thead>  
+                            <tbody>
                                 @foreach ($toko as $item)
                                     <tr>
                                         <td>{{ $item->user->name }}</td>
@@ -76,7 +77,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                            </tbody>
+                            </tbody>                              
                         </table>
 
                     </div>

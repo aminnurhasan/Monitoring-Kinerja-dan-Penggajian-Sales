@@ -51,12 +51,12 @@
                                     <td>{{ $user->email }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Is Admin?</th>
-                                    <td>{{ $user->is_admin ? 'Yes' : 'No' }}</td>
+                                    <th>Gaji Pokok</th>
+                                    <td>Rp. {{number_format($user->gajiPokok, 0, ',', '.')}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Photo</th>
-                                    <td><img width="350" src="{{ asset('/storage/profile/' . $user->foto) }}" alt=""></td>
+                                    <th>Is Admin?</th>
+                                    <td>{{ $user->is_admin ? 'Yes' : 'No' }}</td>
                                 </tr>
                             </tbody>
                         </table>

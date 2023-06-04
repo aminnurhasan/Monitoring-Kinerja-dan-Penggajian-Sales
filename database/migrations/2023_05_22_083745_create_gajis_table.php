@@ -15,15 +15,15 @@ return new class extends Migration
     {
         Schema::create('gaji', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('transaksi_id');
-            $table->date('tglAwal');
-            $table->date('tglAkhir');
-            $table->integer('totalPenjualan');
-            $table->integer('gaji');
+            $table->unsignedBigInteger('user_id');;
+            $table->integer('gajiPokok');
+            $table->integer('insentifKunjungan');
+            $table->integer('bonusPenjualan');
+            $table->integer('gajiTotal');
+            $table->string('bulan');
+            $table->integer('tahun');
 
             $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
-            $table->foreign('transaksi_id')->references('id')->on('transaksi')->onDelete('cascade');
         });
     }
 
