@@ -21,14 +21,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('toko', TokoController::class);
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('user', UserController::class);
-Route::resource('transaksi', TransaksiController::class);
-Route::resource('gaji', GajiController::class);
+Route::group(['middleware' => 'admin'], function (){
+    Route::resource('toko', TokoController::class);
+    Route::resource('user', UserController::class);
+    Route::resource('transaksi', TransaksiController::class);
+    Route::resource('gaji', GajiController::class);    
+});
+
 // Route::get('/gaji/create', [GajiController::class, 'create'])->name('gaji.create');
 // Route::post('/gaji/create', [GajiController::class, 'perhitungan'])->name('hitung.gaji');

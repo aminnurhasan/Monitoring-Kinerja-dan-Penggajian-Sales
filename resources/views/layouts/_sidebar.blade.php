@@ -6,7 +6,7 @@
                 class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-            {{-- <a href="#" class="d-block">{{ Auth::user()->name }}</a> --}}
+            <a href="" class="d-block">{{ Auth::user()->name }}</a>
         </div>
     </div>
 
@@ -20,14 +20,6 @@
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>
                         Dashboard
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ url('/attendance') }}" class="nav-link">
-                    <i class="nav-icon far fa-calendar-alt"></i>
-                    <p>
-                        Attendance
                     </p>
                 </a>
             </li>

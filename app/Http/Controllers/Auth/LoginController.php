@@ -21,6 +21,15 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    // protected function authenticated(Request $request, $user)
+    // {
+    //     if ($user->is_admin) {
+    //         return redirect('/home'); // Redirect ke halaman admin jika is_admin = true
+    //     } else {
+    //         return redirect('/welcome'); // Redirect ke halaman pengguna biasa jika is_admin = false
+    //     }
+    // }
+
     /**
      * Where to redirect users after login.
      *
@@ -36,5 +45,14 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    protected function redirectTo()
+    {
+        if (auth()->user()->is_admin) {
+            return '/home';
+        } else {
+            return abort(403, 'Unauthorized access.');;
+        }
     }
 }
