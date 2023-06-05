@@ -44,7 +44,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <!-- <div id="chart" style="height: 300px"></div> -->
+                        <canvas id="quantityChart"></canvas>
                     </div>
                 </div>
                 <!-- /.card -->

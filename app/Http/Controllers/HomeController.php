@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Transaksi;
+use DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $data = DB::table('transaksi')
+            ->select(DB::raw("DATE_FORMAT(waktu, '%Y-%m') AS bulan, SUM(quantity) AS totalQuantity"))
+            ->groupBy(DB::raw("DATE_FORMAT(waktu, '%Y-%m')"))
+            ->orderBy(DB::raw("DATE_FORMAT(waktu, '%Y-%m')"))
+            ->get();
+        
+        $chartData = [
+            'bulan' => ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
+            'totalQuantity' => []
+        ];
+
+        foreach ($data as $row){
+            $chartData['totalQuantity'][] = $row->totalQuantity;
+        }
+
+        return view('home', compact ('chartData'));
     }
 }
