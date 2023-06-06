@@ -34,8 +34,6 @@
                 </div>
                 @endif
 
-                <a href="{{ route('gaji.create') }}" class="btn btn-sm btn-primary mb-2">Add</a>
-
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
@@ -52,7 +50,6 @@
                                 <div class="col">
                                     <label for="">Bulan</label>
                                     <select name="bulan" class="form-control">
-                                        {{-- @foreach ($bulan as $item) --}}
                                             <option name="bulan" value="1">Januari</option>
                                             <option name="bulan" value="2">Februari</option>
                                             <option name="bulan" value="3">Maret</option>
@@ -65,7 +62,6 @@
                                             <option name="bulan" value="10">Oktober</option>
                                             <option name="bulan" value="11">November</option>
                                             <option name="bulan" value="12">Desember</option>
-                                        {{-- @endforeach --}}
                                     </select>
                                 </div>
                                 <div class="col">
@@ -132,10 +128,10 @@
                                             @else
                                                 <td>Desember</td>
                                             @endif
-                                        <td>{{ $item->gajiPokok }}</td>
-                                        <td>{{ $item->insentifKunjungan }}</td>
-                                        <td>{{ $item->bonusPenjualan }}</td>
-                                        <td>{{ $item->gajiTotal }}</td>
+                                        <td>Rp. {{ number_format($item->gajiPokok) }}</td>
+                                        <td>Rp. {{ number_format($item->insentifKunjungan) }}</td>
+                                        <td>Rp. {{ number_format($item->bonusPenjualan) }}</td>
+                                        <td>Rp. {{ number_format($item->gajiTotal) }}</td>
                                         <td>
                                             <a href='{{ route('gaji.show', $item->id) }}' class="btn btn-warning btn-sm">Show</a>
                                             <a href='{{ url('gaji/' . $item->id . '/edit') }}' class="btn btn-warning btn-sm">Edit</a>

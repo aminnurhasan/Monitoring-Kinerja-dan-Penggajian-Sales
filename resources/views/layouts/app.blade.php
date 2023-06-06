@@ -39,9 +39,9 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="index3.html" class="brand-link">
-        <img src="{{ asset('assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-             style="opacity: .8">
-        <span class="brand-text font-weight-light">AttLive</span>
+        {{-- <img src="{{ asset('assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+             style="opacity: .8"> --}}
+        <span class="brand-text font-weight-light">AppSensi</span>
       </a>
 
       <!-- Sidebar -->
@@ -112,7 +112,7 @@
     </script>
 
     <!-- Chart -->
-    <script>
+    {{-- <script>
       var chartData = @json($chartData);
 
         var ctx = document.getElementById('quantityChart').getContext('2d');
@@ -137,7 +137,7 @@
                 }
             }
         });
-    </script>
+    </script> --}}
     @stack('scripts')
     @livewireScripts
 </body>

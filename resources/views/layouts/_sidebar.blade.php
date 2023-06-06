@@ -27,13 +27,13 @@
                 <a href="{{ url('/user') }}" class="nav-link">
                     <i class="nav-icon fas fa-user"></i>
                     <p>
-                        Users
+                        User
                     </p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{ url('/toko') }}" class="nav-link">
-                    <i class="nav-icon fas fa-user"></i>
+                    <i class="nav-icon fas fa-store"></i>
                     <p>
                         Toko
                     </p>
@@ -41,7 +41,7 @@
             </li>
             <li class="nav-item">
                 <a href="{{ url('/transaksi') }}" class="nav-link">
-                    <i class="nav-icon fas fa-user"></i>
+                    <i class="nav-icon fas fa-list"></i>
                     <p>
                         Transaksi
                     </p>
@@ -49,13 +49,14 @@
             </li>
             <li class="nav-item">
                 <a href="{{ url('/gaji') }}" class="nav-link">
-                    <i class="nav-icon fas fa-user"></i>
+                    <i class="nav-icon fas fa-money-bill"></i>
                     <p>
                         Gaji
                     </p>
                 </a>
             </li>
-            <li class="nav-header">LABELS</li>
+
+            <div class="user-panel pb-3 mb-3 d-flex"></div>
             <li class="nav-item">
                 <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">

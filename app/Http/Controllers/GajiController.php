@@ -35,41 +35,7 @@ class GajiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-    private $inputBulan;
-    private $inputTahun;
-
     public function create(Request $request)
-    {
-        $gaji = Gaji::all();
-        $this->inputBulan = $request->input('bulan');
-        $this->inputTahun = $request->input('tahun');
-
-        $totalGaji = DB::select(DB::raw('
-            SELECT id_user, nama, gapok, insentifKunjungan, bonusPenjualan, SUM(gapok + insentifKunjungan + bonusPenjualan) as totalGaji
-            FROM (
-                SELECT user.id AS id_user, user.name AS nama, user.gajiPokok AS gapok, COUNT(transaksi.user_id) * 10000 AS insentifKunjungan, 	
-                SUM(transaksi.totalPrice) * 0.05 AS bonusPenjualan
-                FROM user
-                JOIN transaksi ON user.id = transaksi.user_id
-                WHERE user.is_admin = 0
-                AND EXTRACT(MONTH FROM transaksi.waktu) = :inputBulan
-                AND EXTRACT(YEAR FROM transaksi.waktu) = :inputTahun
-                GROUP BY user.id, user.name, user.gajiPokok
-            )as subquery
-            GROUP BY id_user, nama, insentifKunjungan, bonusPenjualan, gapok
-        '), ['inputBulan' => $this->inputBulan, 'inputTahun' => $this->inputTahun]);
-
-        return view('pages.gaji.create', ['totalGaji' => $totalGaji], compact('gaji'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
     {
         $gaji = Gaji::all();
         $inputBulan = $request->input('bulan');
@@ -90,62 +56,49 @@ class GajiController extends Controller
             GROUP BY id_user, nama, insentifKunjungan, bonusPenjualan, gapok
         '), ['inputBulan' => $inputBulan, 'inputTahun' => $inputTahun]);
 
-        $bulan = $inputBulan;
-        if($inputBulan == 1 ){
-            $bulan = 'Januari';
-            return $bulan;
-        }else if($inputBulan == 2){
-            $bulan = 'Februari';
-            return $bulan;
-        }else if($inputBulan == 3){
-            $bulan = 'Maret';
-            return $bulan;
-        }else if($inputBulan == 4){
-            $bulan = 'April';
-            return $bulan;
-        }else if($inputBulan == 5){
-            $bulan = 'Mei';
-            return $bulan;
-        }else if($inputBulan == 6){
-            $bulan = 'Juni';
-            return $bulan;
-        }else if($inputBulan == 7){
-            $bulan = 'Juli';
-            return $bulan;
-        }else if($inputBulan == 8){
-            $bulan = 'Agustus';
-            return $bulan;
-        }else if($inputBulan == 9){
-            $bulan = 'September';
-            return $bulan;
-        }else if($inputBulan == 10){
-            $bulan = 'Oktober';
-            return $bulan;
-        }else if($inputBulan == 11){
-            $bulan = 'November';
-            return $bulan;
-        }else if($inputBulan == 12){
-            $bulan = 'Desember';
-            return $bulan;
-        };
+        return view('pages.gaji.create', ['totalGaji' => $totalGaji], compact('gaji'));
+    }
 
-        foreach($totalGaji as $gaji){
-            foreach($bulan as $bulan){
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $gaji = Gaji::all();
+
+        $inputBulan = $request->input('bulan');
+        $inputTahun = $request->input('tahun');
+
+        $totalGaji = DB::select(DB::raw('
+            SELECT id_user, nama, gapok, insentifKunjungan, bonusPenjualan, SUM(gapok + insentifKunjungan + bonusPenjualan) as totalGaji
+            FROM (
+                SELECT user.id AS id_user, user.name AS nama, user.gajiPokok AS gapok, COUNT(transaksi.user_id) * 10000 AS insentifKunjungan, 	
+                SUM(transaksi.totalPrice) * 0.05 AS bonusPenjualan
+                FROM user
+                JOIN transaksi ON user.id = transaksi.user_id
+                WHERE user.is_admin = 0
+                AND EXTRACT(MONTH FROM transaksi.waktu) = :inputBulan
+                AND EXTRACT(YEAR FROM transaksi.waktu) = :inputTahun
+                GROUP BY user.id, user.name, user.gajiPokok
+            )as subquery
+            GROUP BY id_user, nama, insentifKunjungan, bonusPenjualan, gapok
+        '), ['inputBulan' => $inputBulan, 'inputTahun' => $inputTahun]);
+
+        foreach($totalGaji as $gajiSales){
                 Gaji::create([
-                    'user_id' => $gaji->id_user,
-                    'gajiPokok' => $gaji->gapok,
-                    'insentifKunjungan' => $gaji->insentifKunjungan,
-                    'bonusPenjualan' => $gaji->bonusPenjualan,
-                    'gajiTotal' => $gaji->totalGaji,
-                    'bulan' => $bulan,
+                    'user_id' => $gajiSales->id_user,
+                    'gajiPokok' => $gajiSales->gapok,
+                    'insentifKunjungan' => $gajiSales->insentifKunjungan,
+                    'bonusPenjualan' => $gajiSales->bonusPenjualan,
+                    'gajiTotal' => $gajiSales->totalGaji,
+                    'bulan' => $inputBulan,
                     'tahun' => $inputTahun
                 ]);
-            }
-                
         }
-        dd($totalGaji);
         return view('pages.gaji.index', ['totalGaji' => $totalGaji], compact('gaji'));
-        
     }
 
     /**

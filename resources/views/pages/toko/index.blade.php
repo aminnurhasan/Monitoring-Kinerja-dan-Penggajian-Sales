@@ -49,6 +49,7 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
+                                    <th>ID</th>
                                     <th>Nama Sales</th>
                                     <th>Nama Toko</th>
                                     <th>Alamat</th>
@@ -60,6 +61,7 @@
                             <tbody>
                                 @foreach ($toko as $item)
                                     <tr>
+                                        <td>{{ $item->id }}</td>
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->title }}</td>
                                         <td>{{ $item->alamat }}</td>

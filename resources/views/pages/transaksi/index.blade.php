@@ -47,6 +47,7 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
+                                    <th>ID</th>
                                     <th>Nama Toko</th>
                                     <th>Nama Karyawan</th>
                                     <th>Quantity</th>
@@ -56,6 +57,7 @@
                             </thead>
                                 @foreach ($transaksi as $item)
                                     <tr>
+                                        <td>{{ $item->id }}</td>
                                         <td>{{ $item->tokoName }}</td>
                                         <td>{{ $item->salesName }}</td>
                                         <td>{{ $item->quantity }} Packs</td>
