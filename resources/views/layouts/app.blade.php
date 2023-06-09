@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Codepolitan Attendance</title>
+    <title>SMARTS Web</title>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
@@ -39,9 +39,9 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="index3.html" class="brand-link">
-        {{-- <img src="{{ asset('assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-             style="opacity: .8"> --}}
-        <span class="brand-text font-weight-light">AppSensi</span>
+        <img src="{{ asset('storage/logo.png') }}" alt="SMARTS Logo" class="brand-image img-circle elevation-3"
+             style="opacity: .8">
+        <span class="brand-text font-weight-light">SMARTS Web</span>
       </a>
 
       <!-- Sidebar -->
@@ -55,10 +55,10 @@
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-      <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
+      <strong>Copyright &copy; 2031730131 M. Amin Nur Hasan Bariklana</a>.</strong>
       All rights reserved.
       <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 3.0.5
+        <b>Polinema PSDKU Kediri</b>
       </div>
     </footer>
 
@@ -91,8 +91,7 @@
     <!-- Switch -->
     <script src="{{ asset('assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script>
 
-    <!-- Chart -->
-    <script src="{{ asset('assets/plugins/chart.js/Chart.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
       $(function () {
@@ -111,33 +110,6 @@
       });
     </script>
 
-    <!-- Chart -->
-    {{-- <script>
-      var chartData = @json($chartData);
-
-        var ctx = document.getElementById('quantityChart').getContext('2d');
-        var chart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: chartData.bulan,
-                datasets: [{
-                    label: 'Total Penjualan',
-                    data: chartData.totalQuantity,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                    }
-                }
-            }
-        });
-    </script> --}}
     @stack('scripts')
     @livewireScripts
 </body>

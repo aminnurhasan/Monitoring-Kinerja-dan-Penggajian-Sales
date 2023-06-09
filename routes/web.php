@@ -18,7 +18,7 @@ use App\Http\Controllers\GajiController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 
@@ -32,6 +32,3 @@ Route::group(['middleware' => 'admin'], function (){
     Route::resource('transaksi', TransaksiController::class);
     Route::resource('gaji', GajiController::class);    
 });
-
-// Route::get('/gaji/create', [GajiController::class, 'create'])->name('gaji.create');
-// Route::post('/gaji/create', [GajiController::class, 'perhitungan'])->name('hitung.gaji');

@@ -15,44 +15,34 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
-            <li class="nav-item">
-                <a href="{{ url('/home') }}" class="nav-link active">
+            <li class="nav-item ">
+                <a href="{{ url('/home') }}" class="nav-link {{ request()->is('home') ? 'active':'' }}">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                        Dashboard
-                    </p>
+                    <p>Dashboard</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/user') }}" class="nav-link">
+                <a href="{{ url('/user') }}" class="nav-link {{ request()->is('user') ? 'active':'' }}">
                     <i class="nav-icon fas fa-user"></i>
-                    <p>
-                        User
-                    </p>
+                    <p>User</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/toko') }}" class="nav-link">
-                    <i class="nav-icon fas fa-store"></i>
-                    <p>
-                        Toko
-                    </p>
-                </a>
+                    <a href="{{ url('/toko') }}" class="nav-link {{ request()->is('toko', 'toko/create', 'toko/$toko->id', 'toko/edit') ? 'active':'' }}">
+                        <i class="nav-icon fas fa-store"></i>
+                        <p>Toko</p>
+                    </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/transaksi') }}" class="nav-link">
+                <a href="{{ url('/transaksi') }}" class="nav-link {{ request()->is('transaksi') ? 'active':'' }}">
                     <i class="nav-icon fas fa-list"></i>
-                    <p>
-                        Transaksi
-                    </p>
+                    <p>Transaksi</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/gaji') }}" class="nav-link">
+                <a href="{{ url('/gaji') }}" class="nav-link {{ request()->is('gaji') ? 'active':'' }}">
                     <i class="nav-icon fas fa-money-bill"></i>
-                    <p>
-                        Gaji
-                    </p>
+                    <p>Gaji</p>
                 </a>
             </li>
 

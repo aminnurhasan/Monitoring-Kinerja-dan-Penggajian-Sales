@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Toko;
+use DB;
 
 class TokoController extends Controller
 {
@@ -31,7 +32,11 @@ class TokoController extends Controller
      */
     public function create()
     {
-        $user = User::all();
+        $user = DB::select(DB::raw('
+            SELECT id, name, email, is_admin
+            FROM user
+            WHERE is_admin = 0
+        '));
         return view('pages.toko.create', compact('user'));
     }
 
@@ -69,7 +74,6 @@ class TokoController extends Controller
         ];
         Toko::create($toko);
         // Toko::create($request->all());
-
         return redirect()->route('toko.index');
     }
 
@@ -93,7 +97,13 @@ class TokoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $toko = Toko::findOrFail($id);
+        $user = DB::select(DB::raw('
+            SELECT id, name, email, is_admin
+            FROM user
+            WHERE is_admin = 0
+        '));
+        return view('pages.toko.edit', compact('toko', 'user'));
     }
 
     /**
@@ -105,7 +115,11 @@ class TokoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $toko = Toko::findOrFail($id);
+
+        $toko->update($request->all());
+
+        return redirect()->route('toko.index');
     }
 
     /**
@@ -119,15 +133,5 @@ class TokoController extends Controller
         $toko = Toko::find($id);
         $toko->delete();
         return redirect()->route('toko.index');
-    }
-
-    // public function user(){
-    //     $user = User::all();
-    //     return view('pages.user.index', ['user' => $user]);
-    // }
-
-    // public function toko(){
-    //     $toko = Toko::all();
-    //     return view('pages.toko.index', ['toko' => $toko]);
-    // }
+    }    
 }

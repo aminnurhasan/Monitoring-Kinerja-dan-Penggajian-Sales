@@ -2,30 +2,25 @@
 
 @section('content')
 
-<!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
                 <h1 class="m-0 text-dark">Dashboard</h1>
-            </div><!-- /.col -->
+            </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item active">Dashboard</li>
                 </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+            </div>
+        </div>
+    </div>
 </div>
-<!-- /.content-header -->
 
-<!-- Main content -->
 <section class="content">
     <div class="container-fluid">
-        <!-- Main row -->
         <div class="row">
-            <!-- Left col -->
             <section class="col-lg-12">
 
                 @if (session('status'))
@@ -34,39 +29,104 @@
                 </div>
                 @endif
 
-                <!-- Attendance Chart -->
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h4><b>{{ $sales }}</b></h4>
+                                <p>Total Sales</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-person"></i>
+                            </div>
+                            <a href="{{ route('user.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h4><b>{{ $toko }}</b></h4>
+                                <p>Total Toko</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-store"></i>
+                            </div>
+                            <a href="{{ route('toko.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h4><b>{{ $penjualan }} Packs</b></h4>
+                                <p>Total Penjualan Bulan Ini</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-bag"></i>
+                            </div>
+                            <a href="{{ route('transaksi.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h4><b>Rp. {{ number_format($pendapatan) }}</b></h4>
+                                <p>Total Pendapatan Bulan Ini</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-money-bill"></i>
+                            </div>
+                            <a href="{{ route('transaksi.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
                             <i class="ion ion-clipboard mr-1"></i>
-                            Attendance
+                            Grafik Penjualan Produk Tiap Bulan Dalam 1 Tahun
                         </h3>
                     </div>
-                    <!-- /.card-header -->
                     <div class="card-body">
-                        <canvas id="quantityChart"></canvas>
+                        <canvas id="myChart" height="100px"></canvas>
                     </div>
                 </div>
-                <!-- /.card -->
             </section>
-            <!-- /.Left col -->
         </div>
-        <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
+    </div>
 </section>
-<!-- /.content -->
 @endsection
 
 @push('scripts')
-<!-- <script>
-    const chart = new Chartisan({
-        el: '#chart',
-        url: "@chart('attendance_chart')",
-        hooks: new ChartisanHooks()
-            .colors(['#3490dc', '#e3342f', '#38c172'])
-            .legend({ position: 'bottom' })
-            .datasets(['bar', 'bar', { type: 'line', fill: false }])
-            .tooltip()
-    });
-</script> -->
+<script type="text/javascript">
+  
+      var labels =  {{ Js::from($labels) }};
+      var users =  {{ Js::from($data) }};
+  
+      const data = {
+        labels: labels,
+        datasets: [{
+          label: 'Quantity Penjualan (Packs)',
+          backgroundColor: 'rgb(30, 175, 247)',
+          borderColor: 'rgb(2, 106, 176)',
+          borderWidth: 2,
+          data: users,
+        }]
+      };
+  
+      const config = {
+        type: 'bar',
+        data: data,
+        options: {}
+      };
+  
+      const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+      );
+  
+</script>
 @endpush

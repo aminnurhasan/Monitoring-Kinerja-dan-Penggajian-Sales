@@ -3,17 +3,18 @@
 @section('content')
 <div class="login-box">
     <div class="login-logo">
-        <a href="#"><b>Attendance</b>Live</a>
+        <p><b>SMARTS</b></p>
+        <p style="font-size: 17pt; margin-top: -20px">Sales Management and Attendance Tracking System</p>
     </div>
     <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg">Sign up to start your session</p>
+            <p class="login-box-msg">Silahkan Daftar Terlebih Dahulu</p>
 
             <form method="POST" action="{{ route('register') }}">
                 @csrf
                 <div class="input-group mb-3">
-                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                    <input id="name" type="text" placeholder="Name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
@@ -26,7 +27,7 @@
                     @enderror
                 </div>
                 <div class="input-group mb-3">
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                    <input id="email" type="email" placeholder="Email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
@@ -64,15 +65,11 @@
                 </div>
 
                 <!-- /.col -->
-                <div class="col-4">
+                <div class="">
                     <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
                 </div>
                 <!-- /.col -->
             </form>
-
-            <p class="mb-1">
-                <a href="{{ route('login') }}">Already have account? Login</a>
-            </p>
         </div>
         <!-- /.login-card-body -->
     </div>

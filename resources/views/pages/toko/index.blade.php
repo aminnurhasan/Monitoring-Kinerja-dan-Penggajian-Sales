@@ -2,30 +2,25 @@
 
 @section('content')
 
-<!-- Content Header (Page header) -->
-
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Toko</h1>
-            </div><!-- /.col -->
+                <h1 class="m-0 text-dark">Data Toko</h1>
+            </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Toko</li>
+                    <li class="breadcrumb-item"><a href="{{ route('toko.index') }}">Toko</a></li>
+                    <li class="breadcrumb-item active"></li>
                 </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+            </div>
+        </div>
+    </div>
 </div>
-<!-- /.content-header -->
 
 <section class="content">
     <div class="container-fluid">
-        <!-- Main row -->
         <div class="row">
-            <!-- Left col -->
             <section class="col-lg-12">
 
                 @if (session('status'))
@@ -34,24 +29,23 @@
                 </div>
                 @endif
 
-                <a href="{{ route('toko.create') }}" class="btn btn-sm btn-primary mb-2">Add</a>
+                <a href="{{ route('toko.create') }}" class="btn btn-md btn-primary mb-2">Tambah Data Toko</a>
                 
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
                             <i class="ion ion-clipboard mr-1"></i>
-                            Toko
+                            List Data Toko
                         </h3>
                     </div>
-                    <!-- /.card-header -->
                     <div class="card-body">
 
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Nama Sales</th>
                                     <th>Nama Toko</th>
+                                    <th>Nama Sales</th>
                                     <th>Alamat</th>
                                     <th>Snippet</th>
                                     <th>Status</th>
@@ -62,8 +56,8 @@
                                 @foreach ($toko as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->title }}</td>
+                                        <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->alamat }}</td>
                                         <td>{{ $item->snippet }}</td>
                                         <td>@livewire('toko-status', ['model' => $item, 'field' => 'status'], key($toko->id))</td>
@@ -81,15 +75,11 @@
                                 @endforeach
                             </tbody>                              
                         </table>
-
                     </div>
                 </div>
-                <!-- /.card -->
             </section>
-            <!-- /.Left col -->
         </div>
-        <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
+    </div>
 </section>
 
 @endsection

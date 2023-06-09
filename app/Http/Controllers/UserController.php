@@ -45,12 +45,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // $foto = $request->file('image');
-
-        // if ($foto) {
-        //     $request['foto'] = $this->uploadImage($foto, $request->name, 'profile');
-        // }
-
         $request['password'] = Hash::make($request->password);
 
         User::create($request->all());
@@ -92,11 +86,6 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-        // $foto = $request->file('image');
-
-        // if ($foto) {
-        //     $request['foto'] = $this->uploadImage($foto, $request->name, 'profile', true, $user->foto);
-        // }
 
         if ($request->password) {
             $request['password'] = Hash::make($request->password);
@@ -117,11 +106,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-
-        // if ($user->foto) {
-        //     $this->deleteImage($user->foto, 'profile');
-        // }
+        $user = User::find($id);        
 
         $user->delete();
 

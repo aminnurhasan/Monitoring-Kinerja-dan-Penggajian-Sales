@@ -23,10 +23,7 @@ class GajiController extends Controller
 
     public function index(Request $request)
     {
-        $gaji = Gaji::all();
-
-        $bulanGaji = '';
-            
+        $gaji = Gaji::all();        
         return view('pages.gaji.index', compact('gaji'));
     }
 
@@ -38,25 +35,7 @@ class GajiController extends Controller
     public function create(Request $request)
     {
         $gaji = Gaji::all();
-        $inputBulan = $request->input('bulan');
-        $inputTahun = $request->input('tahun');
-
-        $totalGaji = DB::select(DB::raw('
-            SELECT id_user, nama, gapok, insentifKunjungan, bonusPenjualan, SUM(gapok + insentifKunjungan + bonusPenjualan) as totalGaji
-            FROM (
-                SELECT user.id AS id_user, user.name AS nama, user.gajiPokok AS gapok, COUNT(transaksi.user_id) * 10000 AS insentifKunjungan, 	
-                SUM(transaksi.totalPrice) * 0.05 AS bonusPenjualan
-                FROM user
-                JOIN transaksi ON user.id = transaksi.user_id
-                WHERE user.is_admin = 0
-                AND EXTRACT(MONTH FROM transaksi.waktu) = :inputBulan
-                AND EXTRACT(YEAR FROM transaksi.waktu) = :inputTahun
-                GROUP BY user.id, user.name, user.gajiPokok
-            )as subquery
-            GROUP BY id_user, nama, insentifKunjungan, bonusPenjualan, gapok
-        '), ['inputBulan' => $inputBulan, 'inputTahun' => $inputTahun]);
-
-        return view('pages.gaji.create', ['totalGaji' => $totalGaji], compact('gaji'));
+        return view('pages.gaji.create', compact('gaji'));
     }
 
     /**
@@ -98,7 +77,7 @@ class GajiController extends Controller
                     'tahun' => $inputTahun
                 ]);
         }
-        return view('pages.gaji.index', ['totalGaji' => $totalGaji], compact('gaji'));
+        return redirect()->route('gaji.index');
     }
 
     /**
@@ -109,7 +88,8 @@ class GajiController extends Controller
      */
     public function show($id)
     {
-        //
+        $gaji = Gaji::findOrFail($id);
+        return view('pages.gaji.show', compact('gaji'));
     }
 
     /**

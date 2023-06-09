@@ -5,13 +5,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">User</h1>
+                <h1 class="m-0 text-dark">Tambah Data Toko</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item">User</li>
-                    <li class="breadcrumb-item active">Add</li>
+                    <li class="breadcrumb-item"><a href="{{ route('toko.index') }}">Toko</a></li>
+                    <li class="breadcrumb-item active">Tambah</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -32,19 +31,10 @@
                 </div>
                 @endif
 
-                <!-- Attendance Chart -->
-                <a href="{{ route('toko.create') }}" class="btn btn-sm btn-primary mb-2">Add</a>
+                <a href="{{ url()->previous() }}" class="btn btn-md btn-primary mb-2">Kembali</a>
 
                 <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <i class="ion ion-clipboard mr-1"></i>
-                            User
-                        </h3>
-                    </div>
-                    <!-- /.card-header -->
                     <div class="card-body">
-
                         <form action="{{ route('toko.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">

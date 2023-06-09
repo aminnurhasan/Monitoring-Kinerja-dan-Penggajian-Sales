@@ -5,12 +5,11 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">User</h1>
+                <h1 class="m-0 text-dark">Edit Data User</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item">User</li>
+                    <li class="breadcrumb-item"><a href="{{ route('user.index') }}">User</a></li>
                     <li class="breadcrumb-item active">Edit</li>
                 </ol>
             </div><!-- /.col -->
@@ -33,24 +32,13 @@
                 @endif
 
                 <!-- Attendance Chart -->
-                <a href="{{ url()->previous() }}" class="btn btn-sm btn-primary mb-2">Back</a>
+                <a href="{{ url()->previous() }}" class="btn btn-md btn-primary mb-2">Kembali</a>
 
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <i class="ion ion-clipboard mr-1"></i>
-                            User
-                        </h3>
-                    </div>
-                    <!-- /.card-header -->
+                <div class="card">  
                     <div class="card-body">
 
                         <form action="{{ route('user.update', $user->id) }}" method="post" enctype="multipart/form-data">
                             @csrf @method('PUT')
-                            <div class="form-group">
-                                <label for="">ID</label>
-                                <input type="number" name="id" class="form-control" value="{{ old('id', $user->id) }}">
-                            </div>
                             <div class="form-group">
                                 <label for="">Nama</label>
                                 <input type="text" name="name" class="form-control" value="{{ old('name', $user->name) }}">
@@ -61,7 +49,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Password</label>
-                                <input type="password" name="password" class="form-control">
+                                <input type="password" name="password" class="form-control" value="{{ old('password', $user->password) }}">
                             </div>
                             <div class="form-group">
                                 <label for="" style="display: block">Is Admin</label>
@@ -74,14 +62,7 @@
                                     <label class="form-check-label" for="inlineRadio2">No</label>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="">Photo</label>
-                                <input type="file" name="image" class="form-control-file">
-                                @if ($user->foto)
-                                    <img src="{{ asset('/storage/profile/' . $user->foto) }}" alt="" height="100">
-                                @endif
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
                         </form>
 
                     </div>

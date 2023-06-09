@@ -12,8 +12,8 @@
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Transaksi</li>
+                    <li class="breadcrumb-item"><a href="{{ route('transaksi.index') }}">Transaksi</a></li>
+                    <li class="breadcrumb-item active"></li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -38,7 +38,7 @@
                     <div class="card-header">
                         <h3 class="card-title">
                             <i class="ion ion-clipboard mr-1"></i>
-                            Transaksi
+                            List Data Transaksi
                         </h3>
                     </div>
                     <!-- /.card-header -->
@@ -52,6 +52,7 @@
                                     <th>Nama Karyawan</th>
                                     <th>Quantity</th>
                                     <th>Total Price</th>
+                                    <th>Tanggal</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -62,6 +63,7 @@
                                         <td>{{ $item->salesName }}</td>
                                         <td>{{ $item->quantity }} Packs</td>
                                         <td>Rp. {{ number_format($item->totalPrice) }}</td>
+                                        <td>{{ $item->waktu }}</td>
                                         <td>
                                             <a href='{{ route('transaksi.show', $item->id) }}' class="btn btn-warning btn-sm">Show</a>
                                             <form onsubmit="return confirm('Apakah Anda Ingin Menghapus Data ?')" class="d-inline"

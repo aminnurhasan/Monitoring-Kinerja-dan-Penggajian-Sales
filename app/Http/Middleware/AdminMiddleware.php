@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use App\Http\Middleware\Auth;
+use App\Models\Transaksi;
+use DB;
 
 class AdminMiddleware
 {
@@ -17,9 +19,22 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // if (!Auth::user()->is_admin) {
-        //     abort(403, 'Unauthorized access.');
-        // }
+        $data = DB::table('transaksi')
+            ->select(DB::raw("DATE_FORMAT(waktu, '%Y-%m') AS bulan, SUM(quantity) AS totalQuantity"))
+            ->groupBy(DB::raw("DATE_FORMAT(waktu, '%Y-%m')"))
+            ->orderBy(DB::raw("DATE_FORMAT(waktu, '%Y-%m')"))
+            ->get();
+        
+        $chartData = [
+            'bulan' => ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
+            'totalQuantity' => []
+        ];
+
+        foreach ($data as $row){
+            $chartData['totalQuantity'][] = $row->totalQuantity;
+        }
+
+        $request->merge(['chartData' => $chartData]);
 
         return $next($request);
     }

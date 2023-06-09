@@ -3,12 +3,13 @@
 @section('content')
 <div class="login-box">
     <div class="login-logo">
-        <a href="#"><b>Attendance</b>Live</a>
+        <p><b>SMARTS</b></p>
+        <p style="font-size: 17pt; margin-top: -20px">Sales Management and Attendance Tracking System</p>
     </div>
     <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg">Silahkan Login Terlebih Dahulu</p>
 
             <form method="POST" action="{{ route('login') }}">
                 @csrf
@@ -54,15 +55,11 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        <button type="submit" class="btn btn-primary btn-block">Log In</button>
                     </div>
                     <!-- /.col -->
                 </div>
             </form>
-
-            <p class="mb-1">
-                <a href="{{ route('password.request') }}">I forgot my password</a>
-            </p>
         </div>
         <!-- /.login-card-body -->
     </div>
