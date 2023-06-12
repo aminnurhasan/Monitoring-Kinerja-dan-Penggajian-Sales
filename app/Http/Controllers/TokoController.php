@@ -37,6 +37,7 @@ class TokoController extends Controller
             FROM user
             WHERE is_admin = 0
         '));
+        // dd($user);
         return view('pages.toko.create', compact('user'));
     }
 

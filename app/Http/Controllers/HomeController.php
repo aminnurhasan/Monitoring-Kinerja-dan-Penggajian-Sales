@@ -31,13 +31,14 @@ class HomeController extends Controller
         $transaksi = DB::table('transaksi')
             ->select(DB::raw("DATE_FORMAT(waktu, '%Y-%m') AS bulan, SUM(quantity) AS totalQuantity"))
             ->groupBy(DB::raw("DATE_FORMAT(waktu, '%Y-%m')"))
+            ->orderBy('waktu', 'desc')
             ->orderBy(DB::raw("DATE_FORMAT(waktu, '%Y-%m')"))
-            ->pluck('totalQuantity', 'bulan');
+            ->take(12)
+            ->pluck('totalQuantity', 'bulan')
+            ->reverse();
 
         $labels = $transaksi->keys();
         $data = $transaksi->values();
-        
-        $chartData = $request->chartData;
 
         $sales = DB::table('user')
             ->where('is_admin', 0)
@@ -52,6 +53,6 @@ class HomeController extends Controller
         $pendapatan = Transaksi::whereRaw("DATE_FORMAT(waktu, '%Y-%m') = DATE_FORMAT(CURDATE(), '%Y-%m')")
             ->sum('totalPrice');
 
-        return view('home', compact ('chartData', 'sales', 'toko', 'penjualan', 'pendapatan', 'labels', 'data'));
+        return view('home', compact ('sales', 'toko', 'penjualan', 'pendapatan', 'labels', 'data'));
     }
 }

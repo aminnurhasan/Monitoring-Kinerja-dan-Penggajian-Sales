@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\GajiController;
+use App\Http\Controllers\KinerjaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,4 +32,8 @@ Route::group(['middleware' => 'admin'], function (){
     Route::resource('user', UserController::class);
     Route::resource('transaksi', TransaksiController::class);
     Route::resource('gaji', GajiController::class);    
+    Route::resource('kinerja', KinerjaController::class);
+
+    // Route::get('/sales-dropdown', [KinerjaController::class, 'getSalesDropdown']);
+    Route::post('chart', [KinerjaController::class, 'chart']);
 });

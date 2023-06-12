@@ -10,8 +10,8 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard</li>
+                    <li class="breadcrumb-item"><a href="">Dashboard</a></li>
+                    <li class="breadcrumb-item active"></li>
                 </ol>
             </div>
         </div>
@@ -87,7 +87,7 @@
                     <div class="card-header">
                         <h3 class="card-title">
                             <i class="ion ion-clipboard mr-1"></i>
-                            Grafik Penjualan Produk Tiap Bulan Dalam 1 Tahun
+                            Grafik Penjualan Produk 12 Bulan Terakhir
                         </h3>
                     </div>
                     <div class="card-body">
@@ -103,30 +103,31 @@
 @push('scripts')
 <script type="text/javascript">
   
-      var labels =  {{ Js::from($labels) }};
-      var users =  {{ Js::from($data) }};
-  
-      const data = {
-        labels: labels,
-        datasets: [{
-          label: 'Quantity Penjualan (Packs)',
-          backgroundColor: 'rgb(30, 175, 247)',
-          borderColor: 'rgb(2, 106, 176)',
-          borderWidth: 2,
-          data: users,
-        }]
-      };
-  
-      const config = {
-        type: 'bar',
-        data: data,
-        options: {}
-      };
-  
-      const myChart = new Chart(
-        document.getElementById('myChart'),
-        config
-      );
+    var labels =  {{ Js::from($labels) }};
+    var users =  {{ Js::from($data) }};
+
+    const data = {
+    labels: labels,
+    datasets: [{
+        label: 'Quantity Penjualan (Packs)',
+    //   backgroundColor: 'rgb(129, 236, 252)',
+        borderColor: 'rgb(2, 187, 214)',
+        borderWidth: 2,
+        data: users,
+        tension: 0.1
+    }]
+    };
+
+    const config = {
+    type: 'line',
+    data: data,
+    options: {}
+    };
+
+    const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+    );
   
 </script>
 @endpush
