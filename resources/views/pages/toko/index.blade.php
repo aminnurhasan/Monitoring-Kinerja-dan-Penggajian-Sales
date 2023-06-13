@@ -43,13 +43,13 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Nama Toko</th>
-                                    <th>Nama Sales</th>
-                                    <th>Alamat</th>
-                                    <th>Snippet</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
+                                    <th class="col-1">ID</th>
+                                    <th class="col-2">Nama Toko</th>
+                                    <th class="col-2">Nama Sales</th>
+                                    <th class="col-2">Alamat</th>
+                                    <th class="col-2">Snippet</th>
+                                    <th class="col-1">Status</th>
+                                    <th class="col-2">Action</th>
                                 </tr>
                             </thead>  
                             <tbody>
@@ -62,13 +62,13 @@
                                         <td>{{ $item->snippet }}</td>
                                         <td>@livewire('toko-status', ['model' => $item, 'field' => 'status'], key($toko->id))</td>
                                         <td>
-                                            <a href='{{ route('toko.show', $item->id) }}' class="btn btn-warning btn-sm">Show</a>
-                                            <a href='{{ url('toko/' . $item->id . '/edit') }}' class="btn btn-warning btn-sm">Edit</a>
+                                            <a href='{{ route('toko.show', $item->id) }}' class="btn btn-warning btn-sm fas fa-eye"></a>
+                                            <a href='{{ url('toko/' . $item->id . '/edit') }}' class="btn btn-warning btn-sm fas fa-pen"></a>
                                             <form onsubmit="return confirm('Apakah Anda Ingin Menghapus Data ?')" class="d-inline"
                                                 action="{{ url('toko/' . $item->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" name='submit' class="btn btn-danger btn-sm">Del</button>
+                                                <button type="submit" name='submit' class="btn btn-danger btn-sm fas fa-trash-can"></button>
                                             </form>
                                         </td>
                                     </tr>

@@ -37,7 +37,6 @@ class TokoController extends Controller
             FROM user
             WHERE is_admin = 0
         '));
-        // dd($user);
         return view('pages.toko.create', compact('user'));
     }
 
@@ -74,7 +73,6 @@ class TokoController extends Controller
             'snippet' => $request->snippet,
         ];
         Toko::create($toko);
-        // Toko::create($request->all());
         return redirect()->route('toko.index');
     }
 

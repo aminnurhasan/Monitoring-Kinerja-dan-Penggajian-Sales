@@ -6,23 +6,20 @@
         <div class="row mb-2">
             <div class="col-sm-6">
                 <h1 class="m-0 text-dark">Gaji Sales</h1>
-            </div><!-- /.col -->
+            </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('gaji.index') }}">Gaji</a></li>
                     <li class="breadcrumb-item active">Tambah</li>
                 </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+            </div>
+        </div>
+    </div>
 </div>
-<!-- /.content-header -->
 
 <section class="content">
     <div class="container-fluid">
-        <!-- Main row -->
         <div class="row">
-            <!-- Left col -->
             <section class="col-lg-12">
 
                 @if (session('status'))
@@ -40,7 +37,7 @@
                             Generate Gaji Bulanan Sales
                         </h3>
                     </div>
-                    <!-- /.card-header -->
+
                     <div class="card-body">
 
                         <form action="{{ route('gaji.store') }}" method="post" enctype="multipart/form-data">
@@ -74,12 +71,9 @@
                         </form>
                     </div>
                 </div>     
-                <!-- /.card -->
             </section>
-            <!-- /.Left col -->
         </div>
-        <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
+    </div>
 </section>
 @endsection
 

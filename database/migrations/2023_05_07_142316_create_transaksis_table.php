@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('salesName');
             $table->integer('quantity');
             $table->integer('totalPrice');
-            $table->date('waktu');
+            $table->timestamp('waktu');
 
             $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
         });

@@ -72,12 +72,9 @@
 
                     </div>
                 </div>
-                <!-- /.card -->
             </section>
-            <!-- /.Left col -->
         </div>
-        <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
+    </div>
 </section>
 @endsection
 

@@ -2,30 +2,25 @@
 
 @section('content')
 
-<!-- Content Header (Page header) -->
-
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
                 <h1 class="m-0 text-dark">Transaksi</h1>
-            </div><!-- /.col -->
+            </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('transaksi.index') }}">Transaksi</a></li>
                     <li class="breadcrumb-item active"></li>
                 </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+            </div>
+        </div>
+    </div>
 </div>
-<!-- /.content-header -->
 
 <section class="content">
     <div class="container-fluid">
-        <!-- Main row -->
         <div class="row">
-            <!-- Left col -->
             <section class="col-lg-12">
 
                 @if (session('status'))
@@ -41,19 +36,19 @@
                             List Data Transaksi
                         </h3>
                     </div>
-                    <!-- /.card-header -->
+
                     <div class="card-body">
 
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Nama Toko</th>
-                                    <th>Nama Karyawan</th>
-                                    <th>Quantity</th>
-                                    <th>Total Price</th>
-                                    <th>Tanggal</th>
-                                    <th>Action</th>
+                                    <th class="col-1">ID</th>
+                                    <th class="col-2">Nama Toko</th>
+                                    <th class="col-2">Nama Karyawan</th>
+                                    <th class="col-2">Quantity</th>
+                                    <th class="col-2">Total Price</th>
+                                    <th class="col-2">Tanggal</th>
+                                    <th class="col-1">Action</th>
                                 </tr>
                             </thead>
                                 @foreach ($transaksi as $item)
@@ -65,12 +60,12 @@
                                         <td>Rp. {{ number_format($item->totalPrice) }}</td>
                                         <td>{{ $item->waktu }}</td>
                                         <td>
-                                            <a href='{{ route('transaksi.show', $item->id) }}' class="btn btn-warning btn-sm">Show</a>
+                                            <a href='{{ route('transaksi.show', $item->id) }}' class="btn btn-warning btn-sm fas fa-eye"></a>
                                             <form onsubmit="return confirm('Apakah Anda Ingin Menghapus Data ?')" class="d-inline"
                                                 action="{{ url('transaksi/' . $item->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" name='submit' class="btn btn-danger btn-sm">Del</button>
+                                                <button type="submit" name='submit' class="btn btn-danger btn-sm fas fa-trash-can"></button>
                                             </form>
                                         </td>
                                     </tr>
@@ -80,12 +75,8 @@
 
                     </div>
                 </div>
-                <!-- /.card -->
             </section>
-            <!-- /.Left col -->
         </div>
-        <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
+    </div>
 </section>
-
 @endsection

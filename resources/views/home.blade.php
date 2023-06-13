@@ -37,7 +37,7 @@
                                 <p>Total Sales</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-person"></i>
+                                <i class="fa fa-user"></i>
                             </div>
                             <a href="{{ route('user.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
@@ -63,7 +63,7 @@
                                 <p>Total Penjualan Bulan Ini</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-bag"></i>
+                                <i class="fas fa-bag-shopping"></i>
                             </div>
                             <a href="{{ route('transaksi.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
@@ -76,7 +76,7 @@
                                 <p>Total Pendapatan Bulan Ini</p>
                             </div>
                             <div class="icon">
-                                <i class="fas fa-money-bill"></i>
+                                <i class="fas fa-money-check-dollar"></i>
                             </div>
                             <a href="{{ route('transaksi.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
@@ -91,7 +91,7 @@
                         </h3>
                     </div>
                     <div class="card-body">
-                        <canvas id="myChart" height="100px"></canvas>
+                        <canvas id="myChart" height="70px"></canvas>
                     </div>
                 </div>
             </section>

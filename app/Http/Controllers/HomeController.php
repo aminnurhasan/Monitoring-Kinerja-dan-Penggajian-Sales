@@ -28,6 +28,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        // Query Quantity Penjualan Semua Sales Dalam 12 Bulan
         $transaksi = DB::table('transaksi')
             ->select(DB::raw("DATE_FORMAT(waktu, '%Y-%m') AS bulan, SUM(quantity) AS totalQuantity"))
             ->groupBy(DB::raw("DATE_FORMAT(waktu, '%Y-%m')"))
@@ -40,16 +41,20 @@ class HomeController extends Controller
         $labels = $transaksi->keys();
         $data = $transaksi->values();
 
+        // Jumlah Sales
         $sales = DB::table('user')
             ->where('is_admin', 0)
             ->count();
 
+        // Jumlah Toko
         $toko = DB::table('toko')
             ->count();
 
+        // Quantity Penjualan Bulan Ini
         $penjualan = Transaksi::whereRaw("DATE_FORMAT(waktu, '%Y-%m') = DATE_FORMAT(CURDATE(), '%Y-%m')")
             ->sum('quantity');
 
+        // Pendapatan Bulan Ini
         $pendapatan = Transaksi::whereRaw("DATE_FORMAT(waktu, '%Y-%m') = DATE_FORMAT(CURDATE(), '%Y-%m')")
             ->sum('totalPrice');
 

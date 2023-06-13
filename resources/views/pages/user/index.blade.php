@@ -2,30 +2,25 @@
 
 @section('content')
 
-<!-- Content Header (Page header) -->
-
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
                 <h1 class="m-0 text-dark">Data User</h1>
-            </div><!-- /.col -->
+            </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="">User</a></li>
                     <li class="breadcrumb-item"></li>
                 </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+            </div>
+        </div>
+    </div>
 </div>
-<!-- /.content-header -->
 
 <section class="content">
     <div class="container-fluid">
-        <!-- Main row -->
         <div class="row">
-            <!-- Left col -->
             <section class="col-lg-12">
 
                 @if (session('status'))
@@ -43,15 +38,16 @@
                             List Data User
                         </h3>
                     </div>
+
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Nama</th>
-                                    <th>Email</th>
-                                    <th>Hak Akses</th>
-                                    <th>Aksi</th>
+                                    <th class="col-1">ID</th>
+                                    <th class="col-3">Nama</th>
+                                    <th class="col-4">Email</th>
+                                    <th class="col-2">Hak Akses</th>
+                                    <th class="col-2">Aksi</th>
                                 </tr>
                             </thead>
                                 @foreach ($user as $item)
@@ -65,13 +61,13 @@
                                                 <td>Admin</td>
                                             @endif
                                         <td>
-                                            <a href='{{ route('user.show', $item->id) }}' class="btn btn-warning btn-sm">Show</a>
-                                            <a href='{{ url('user/' . $item->id . '/edit') }}' class="btn btn-warning btn-sm">Edit</a>
+                                            <a href='{{ route('user.show', $item->id) }}' class="btn btn-warning btn-sm fas fa-eye"></a>
+                                            <a href='{{ url('user/' . $item->id . '/edit') }}' class="btn btn-warning btn-sm fas fa-pen"></a>
                                             <form onsubmit="return confirm('Apakah Anda Ingin Menghapus Data ?')" class="d-inline"
                                                 action="{{ url('user/' . $item->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" name='submit' class="btn btn-danger btn-sm">Del</button>
+                                                <button type="submit" name='submit' class="btn btn-danger btn-sm fas fa-trash-can"></button>
                                             </form>
                                         </td>
                                     </tr>
@@ -81,12 +77,8 @@
 
                     </div>
                 </div>
-                <!-- /.card -->
             </section>
-            <!-- /.Left col -->
         </div>
-        <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
+    </div>
 </section>
-
 @endsection

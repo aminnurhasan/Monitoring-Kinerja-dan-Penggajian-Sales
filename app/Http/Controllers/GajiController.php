@@ -51,6 +51,7 @@ class GajiController extends Controller
         $inputBulan = $request->input('bulan');
         $inputTahun = $request->input('tahun');
 
+        // Query Menghitung Gaji Sales
         $totalGaji = DB::select(DB::raw('
             SELECT id_user, nama, gapok, insentifKunjungan, bonusPenjualan, SUM(gapok + insentifKunjungan + bonusPenjualan) as totalGaji
             FROM (
@@ -66,6 +67,7 @@ class GajiController extends Controller
             GROUP BY id_user, nama, insentifKunjungan, bonusPenjualan, gapok
         '), ['inputBulan' => $inputBulan, 'inputTahun' => $inputTahun]);
 
+        // Add Gaji User ke Database
         foreach($totalGaji as $gajiSales){
                 Gaji::create([
                     'user_id' => $gajiSales->id_user,

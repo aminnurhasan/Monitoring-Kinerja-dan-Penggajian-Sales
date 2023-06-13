@@ -2,30 +2,25 @@
 
 @section('content')
 
-<!-- Content Header (Page header) -->
-
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
                 <h1 class="m-0 text-dark">Gaji Sales</h1>
-            </div><!-- /.col -->
+            </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item active">Gaji</li>
                 </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+            </div>
+        </div>
+    </div>
 </div>
-<!-- /.content-header -->
 
 <section class="content">
     <div class="container-fluid">
-        <!-- Main row -->
         <div class="row">
-            <!-- Left col -->
             <section class="col-lg-12">
 
                 @if (session('status'))
@@ -43,19 +38,19 @@
                             Gaji Sales
                         </h3>
                     </div>
-                    <!-- /.card-header -->
+                    
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Nama Sales</th>
-                                    <th>Bulan</th>
-                                    <th>Gaji Pokok</th>
-                                    <th>Insentif Kunjungan</th>
-                                    <th>Bonus Penjualan</th>
-                                    <th>Total Gaji</th>
-                                    <th>Action</th>
+                                    <th class="col-1">ID</th>
+                                    <th class="col-2">Nama Sales</th>
+                                    <th class="col-1">Bulan</th>
+                                    <th class="col-2">Gaji Pokok</th>
+                                    <th class="col-1">Insentif Kunjungan</th>
+                                    <th class="col-1">Bonus Penjualan</th>
+                                    <th class="col-2">Total Gaji</th>
+                                    <th class="col-1">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -93,12 +88,12 @@
                                         <td>Rp. {{ number_format($item->bonusPenjualan) }}</td>
                                         <td>Rp. {{ number_format($item->gajiTotal) }}</td>
                                         <td>
-                                            <a href='{{ route('gaji.show', $item->id) }}' class="btn btn-warning btn-sm">Show</a>
+                                            <a href='{{ route('gaji.show', $item->id) }}' class="btn btn-warning btn-sm fas fa-eye"></a>
                                             <form onsubmit="return confirm('Apakah Anda Ingin Menghapus Data ?')" class="d-inline"
                                                 action="{{ url('gaji/' . $item->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" name='submit' class="btn btn-danger btn-sm">Del</button>
+                                                <button type="submit" name='submit' class="btn btn-danger btn-sm fas fa-trash-can"></button>
                                             </form>
                                         </td>
                                     </tr>
@@ -108,12 +103,8 @@
 
                     </div>
                 </div>
-                <!-- /.card -->
-            </section>
-            <!-- /.Left col -->
+            </section>            
         </div>
-        <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
+    </div>
 </section>
-
 @endsection
