@@ -28,6 +28,8 @@
                 </div>
                 @endif
 
+                <a href="{{ url()->previous() }}" class="btn btn-md btn-primary mb-2">Kembali</a>
+
                 <div class="card">
                     <div class="card-body">
 

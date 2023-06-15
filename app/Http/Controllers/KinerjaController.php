@@ -53,13 +53,13 @@ class KinerjaController extends Controller
 
         // Quantity Penjualan Per Sales
         $penjualanPerSales = DB::table('transaksi')
-            ->select(DB::raw("DATE_FORMAT(waktu, '%Y-%m') AS bulan, SUM(quantity) AS totalQuantity"))
+            ->select(DB::raw("DATE_FORMAT(waktu, '%Y-%m') AS bulan, SUM(totalPrice) AS totalPenjualan"))
             ->where('user_id', $salesId)
             ->groupBy(DB::raw("DATE_FORMAT(waktu, '%Y-%m')"))
             ->orderBy('waktu', 'desc')
             ->orderBy(DB::raw("DATE_FORMAT(waktu, '%Y-%m')"))
             ->take(12)
-            ->pluck('totalQuantity', 'bulan')
+            ->pluck('totalPenjualan', 'bulan')
             ->reverse();
 
         $labelsPenSales = $penjualanPerSales->keys();

@@ -58,7 +58,7 @@
                                             <th class="col-1">No</th>
                                             <th class="col-4">Nama Sales</th>
                                             <th class="col-3">Quantity</th>
-                                            <th class="col-3">Total</th>
+                                            <th class="col-3">Omset</th>
                                         </tr>
                                     </thead>
                                         @foreach ($topSales as $item)
@@ -113,7 +113,7 @@
                                     <div class="card-header">
                                         <h3 class="card-title">
                                             <i class="ion ion-clipboard mr-1"></i>
-                                            Quantity Penjualan 12 Bulan Terakhir
+                                            Omset Penjualan 12 Bulan Terakhir
                                         </h3>
                                         <div class="card-tools">
                                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
@@ -245,7 +245,7 @@
     const dataPenjualanSales = {
     labels: labelsPenSales,
     datasets: [{
-        label: 'Quantity Penjualan (Packs)',
+        label: 'Total Omset',
         backgroundColor: 'rgb(129, 236, 252)',
         borderColor: 'rgb(2, 187, 214)',
         borderWidth: 2,
