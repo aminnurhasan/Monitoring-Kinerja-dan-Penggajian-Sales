@@ -22,9 +22,9 @@
                 </a>
             </li>
 
-            <li class="nav-header">
+            {{-- <div class="sidebar-heading ml-2 mb-2" style="color: #f0f0f0; font-size: 14pt">
                 Kelola Data
-            </li>
+            </div> --}}
 
             <li class="nav-item">
                 <a href="{{ url('/user') }}" class="nav-link">
@@ -68,5 +68,4 @@
             </li>
         </ul>
     </nav>
-    <!-- /.sidebar-menu -->
 </div>

@@ -88,6 +88,10 @@ class TransaksiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $transaksi = Transaksi::find($id);        
+
+        $transaksi->delete();
+
+        return redirect()->route('transaksi.index');
     }
 }

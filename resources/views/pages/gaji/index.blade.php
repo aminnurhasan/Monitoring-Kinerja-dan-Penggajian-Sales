@@ -46,6 +46,7 @@
                                     <th class="col-1">ID</th>
                                     <th class="col-2">Nama Sales</th>
                                     <th class="col-1">Bulan</th>
+                                    <th class="col-1">Tahun</th>
                                     <th class="col-2">Gaji Pokok</th>
                                     <th class="col-1">Insentif Kunjungan</th>
                                     <th class="col-1">Bonus Penjualan</th>
@@ -83,6 +84,7 @@
                                             @else
                                                 <td>Desember</td>
                                             @endif
+                                        <td>{{ $item->tahun }}</td>
                                         <td>Rp. {{ number_format($item->gajiPokok) }}</td>
                                         <td>Rp. {{ number_format($item->insentifKunjungan) }}</td>
                                         <td>Rp. {{ number_format($item->bonusPenjualan) }}</td>
