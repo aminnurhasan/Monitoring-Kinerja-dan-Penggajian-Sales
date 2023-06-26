@@ -30,6 +30,69 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('12345678'),
                 'is_admin' => 0
             ],
+            [
+                'id' => 2002,
+                'name' => 'Andrian',
+                'email' => 'andrian@gmail.com',
+                'password' => bcrypt('12345678'),
+                'is_admin' => 0
+            ],
+            [
+                'id' => 2003,
+                'name' => 'Akbar',
+                'email' => 'akbar@gmail.com',
+                'password' => bcrypt('12345678'),
+                'is_admin' => 0
+            ],
+            [
+                'id' => 2004,
+                'name' => 'Prima',
+                'email' => 'prima@gmail.com',
+                'password' => bcrypt('12345678'),
+                'is_admin' => 0
+            ],
+            [
+                'id' => 2005,
+                'name' => 'Aqim',
+                'email' => 'aqim@gmail.com',
+                'password' => bcrypt('12345678'),
+                'is_admin' => 0
+            ],
+            [
+                'id' => 2006,
+                'name' => 'Chosyi',
+                'email' => 'chosyi@gmail.com',
+                'password' => bcrypt('12345678'),
+                'is_admin' => 0
+            ],
+            [
+                'id' => 2007,
+                'name' => 'Abdul',
+                'email' => 'abdul@gmail.com',
+                'password' => bcrypt('12345678'),
+                'is_admin' => 0
+            ],
+            [
+                'id' => 2008,
+                'name' => 'Slamet',
+                'email' => 'slamet@gmail.com',
+                'password' => bcrypt('12345678'),
+                'is_admin' => 0
+            ],
+            [
+                'id' => 2009,
+                'name' => 'Adit',
+                'email' => 'adit@gmail.com',
+                'password' => bcrypt('12345678'),
+                'is_admin' => 0
+            ],
+            [
+                'id' => 2010,
+                'name' => 'Hadi',
+                'email' => 'hadi@gmail.com',
+                'password' => bcrypt('12345678'),
+                'is_admin' => 0
+            ],
         ];
         foreach ($user as $user) {
             $users = new User();

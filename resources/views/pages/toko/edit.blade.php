@@ -47,7 +47,7 @@
                                 <label for="">Nama Sales</label>
                                 <select name="user_id" class="form-control">
                                     @foreach ($user as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        <option value="{{ $item->id }}" {{ $toko->user_id == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

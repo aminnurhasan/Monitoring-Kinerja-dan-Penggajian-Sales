@@ -35,7 +35,7 @@
                             <div class="card-header">
                                 <div class="card-title">
                                     <i class="ion ion-clipboard mr-1"></i>
-                                    Penjualan Seluruh Sales 12 Bulan Terakhir
+                                    Penjualan Seluruh Sales
                                 </div>
                             </div>
                             <div class="card-body">
@@ -87,7 +87,7 @@
                                 <div class="col-sm-5">
                                     <select name="user_id" class="form-control" id="user_id">
                                             @foreach ($sales as $item)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                <option value="{{ $item->id }}" {{ $salesId == $item->id ? 'selected' : '' }} >{{ $item->name }}</option>
                                             @endforeach
                                     </select>
                                 </div>
@@ -113,7 +113,7 @@
                                     <div class="card-header">
                                         <h3 class="card-title">
                                             <i class="ion ion-clipboard mr-1"></i>
-                                            Omset Penjualan 12 Bulan Terakhir
+                                            Omset Penjualan
                                         </h3>
                                         <div class="card-tools">
                                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
@@ -131,7 +131,7 @@
                                     <div class="card-header">
                                         <h3 class="card-title">
                                             <i class="ion ion-clipboard mr-1"></i>
-                                            Jumlah Kunjungan Sales 12 Bulan Terakhir
+                                            Jumlah Kunjungan Sales
                                         </h3>
                                         <div class="card-tools">
                                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
@@ -247,7 +247,9 @@
     datasets: [{
         label: 'Total Omset',
         backgroundColor: 'rgb(129, 236, 252)',
+        // backgroundColor: borderColorPenSales,
         borderColor: 'rgb(2, 187, 214)',
+        // borderColor: backgroundColorPenSales,
         borderWidth: 2,
         data: dataPenSales,
         tension: 0.2
@@ -273,12 +275,15 @@
     var labelsKunjungan =  {{ Js::from($labelsKunjungan) }};
     var dataKunjungan =  {{ Js::from($dataKunjungan) }};
 
+    const backgroundColorKunj = dataKunjungan.map(value => value < 10 ? 'rgb(214, 2, 9)' : 'rgb(129, 236, 252)' );
+    // const borderColorKunj = dataKunjungan.map(value => value < 10 ?  'rgb(252, 3, 3)' : 'rgb(129, 236, 252)');
+
     const dataKunjunganSales = {
     labels: labelsKunjungan,
     datasets: [{
         label: 'Kunjungan',
-        backgroundColor: 'rgb(129, 236, 252)',
-        borderColor: 'rgb(2, 187, 214)',
+        backgroundColor: backgroundColorKunj,
+        // borderColor: borderColorKunj,
         borderWidth: 2,
         data: dataKunjungan,
         tension: 0.2

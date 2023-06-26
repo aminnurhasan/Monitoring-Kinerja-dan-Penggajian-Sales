@@ -25,6 +25,20 @@ class TokoController extends Controller
         return view('pages.toko.index', compact("toko"));
     }
 
+    public function status($id)
+    {
+        $toko = Toko::findOrFail($id);
+        $statusGet = $toko->status;
+        // dd($toko);
+        if($statusGet == 0) {
+            $toko->update(['status' => 1]);
+            return redirect()->route('toko.index');
+        }else{
+            $toko->update(['status' => 0]);
+            return redirect()->route('toko.index');
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *

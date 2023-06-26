@@ -86,7 +86,7 @@
                                             @endif
                                         <td>{{ $item->tahun }}</td>
                                         <td>Rp. {{ number_format($item->gajiPokok) }}</td>
-                                        <td>Rp. {{ number_format($item->insentifKunjungan) }}</td>
+                                        <td>Rp. {{ number_format($item->intensifKunjungan) }}</td>
                                         <td>Rp. {{ number_format($item->bonusPenjualan) }}</td>
                                         <td>Rp. {{ number_format($item->gajiTotal) }}</td>
                                         <td>

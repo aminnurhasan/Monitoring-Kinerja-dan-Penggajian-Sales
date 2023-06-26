@@ -51,6 +51,14 @@ class KinerjaController extends Controller
             LIMIT 5
         '));
 
+        // $nama = Transaksi::join('user', 'transaksi.user_id', '=', 'user.id')
+        //     ->where('user.id', $salesId)
+        //     ->select('name')
+        //     // ->limit(1)
+        //     ->first()
+        //     ->get();
+
+
         // Quantity Penjualan Per Sales
         $penjualanPerSales = DB::table('transaksi')
             ->select(DB::raw("DATE_FORMAT(waktu, '%Y-%m') AS bulan, SUM(totalPrice) AS totalPenjualan"))
@@ -78,7 +86,7 @@ class KinerjaController extends Controller
         $labelsKunjungan = $kunjunganPerSales->keys();
         $dataKunjungan = $kunjunganPerSales->values();
 
-        return view('pages.kinerja.index', compact('sales', 'topSales', 'labelsPen', 'dataPen', 'labelsPenSales', 'dataPenSales', 'labelsKunjungan', 'dataKunjungan'));
+        return view('pages.kinerja.index', compact('sales', 'salesId', 'topSales', 'labelsPen', 'dataPen', 'labelsPenSales', 'dataPenSales', 'labelsKunjungan', 'dataKunjungan'));
     }
 
     // public function chart(Request $request)

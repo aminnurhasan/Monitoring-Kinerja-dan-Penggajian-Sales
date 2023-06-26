@@ -14,7 +14,7 @@ class Gaji extends Model
     protected $fillable = [
         'user_id',
         'gajiPokok',
-        'insentifKunjungan',
+        'intensifKunjungan',
         'bonusPenjualan',
         'gajiTotal',
         'bulan',

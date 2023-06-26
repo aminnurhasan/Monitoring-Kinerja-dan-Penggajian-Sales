@@ -36,4 +36,5 @@ Route::group(['middleware' => 'admin'], function (){
 
     // Route::get('/sales-dropdown', [KinerjaController::class, 'getSalesDropdown']);
     Route::post('chart', [KinerjaController::class, 'chart']);
+    Route::get('toko/status/{id}', [TokoController::class, 'status'])->name('status');
 });

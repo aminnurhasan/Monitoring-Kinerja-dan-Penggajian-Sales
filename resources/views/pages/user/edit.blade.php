@@ -44,8 +44,8 @@
                                 <input type="email" name="email" class="form-control" value="{{ old('email', $user->email) }}">
                             </div>
                             <div class="form-group">
-                                <label for="">Password</label>
-                                <input type="password" name="password" class="form-control" value="{{ old('password', $user->password) }}">
+                                <label for="">Gaji Pokok</label>
+                                <input type="number" name="gajiPokok" class="form-control" value="{{ old('gajiPokok', $user->gajiPokok) }}">
                             </div>
                             <div class="form-group">
                                 <label for="" style="display: block">Is Admin</label>

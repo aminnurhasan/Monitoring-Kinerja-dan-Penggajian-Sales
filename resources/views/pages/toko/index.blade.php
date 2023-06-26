@@ -47,8 +47,9 @@
                                     <th class="col-2">Nama Toko</th>
                                     <th class="col-2">Nama Sales</th>
                                     <th class="col-2">Alamat</th>
-                                    <th class="col-2">Snippet</th>
+                                    <th class="col-1">Snippet</th>
                                     <th class="col-1">Status</th>
+                                    {{-- <th class="col-1">Connect</th> --}}
                                     <th class="col-2">Action</th>
                                 </tr>
                             </thead>  
@@ -60,7 +61,15 @@
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->alamat }}</td>
                                         <td>{{ $item->snippet }}</td>
-                                        <td>@livewire('toko-status', ['model' => $item, 'field' => 'status'], key($toko->id))</td>
+                                        {{-- <td><span class="badge {{ ($item->status == 0 ) ? 'badge-danger' : 'badge-success' }}">{{ ($item->status == 0 ) ? 'Tidak Aktif' : 'Aktif' }}</span></td> --}}
+                                        <td>
+                                            @if ($item->status == 0)
+                                                <a href="{{ route('status', $item->id) }}" type="button" class="btn btn-danger">Mati</a>
+                                            @else
+                                                <a href="{{ route('status', $item->id) }}" type="button" class="btn btn-success">Aktif</a>
+                                            @endif
+                                        </td>
+                                        {{-- <td>@livewire('toko-status', ['model' => $item, 'field' => 'status'], key($toko->id))</td> --}}
                                         <td>
                                             <a href='{{ route('toko.show', $item->id) }}' class="btn btn-warning btn-sm fas fa-eye"></a>
                                             <a href='{{ url('toko/' . $item->id . '/edit') }}' class="btn btn-warning btn-sm fas fa-pen"></a>

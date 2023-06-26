@@ -87,7 +87,7 @@
                     <div class="card-header">
                         <h3 class="card-title">
                             <i class="ion ion-clipboard mr-1"></i>
-                            Grafik Penjualan Produk 12 Bulan Terakhir
+                            Grafik Penjualan Produk
                         </h3>
                     </div>
                     <div class="card-body">

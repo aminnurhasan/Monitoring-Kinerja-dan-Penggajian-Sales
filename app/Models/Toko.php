@@ -19,6 +19,7 @@ class Toko extends Model
         'latitude',
         'longitude',
         'snippet',
+        'status'
     ];
 
     public function user()

@@ -48,7 +48,7 @@
                                 </tr>
                                 <tr>
                                     <th>Insentif Kunjungan</th>
-                                    <td>Rp. {{ number_format($gaji->insentifKunjungan) }}</td>
+                                    <td>Rp. {{ number_format($gaji->intensifKunjungan) }}</td>
                                 </tr>
                                 <tr>
                                     <th>Bonus Penjualan</th>

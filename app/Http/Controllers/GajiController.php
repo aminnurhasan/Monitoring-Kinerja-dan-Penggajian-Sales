@@ -53,9 +53,9 @@ class GajiController extends Controller
 
         // Query Menghitung Gaji Sales
         $totalGaji = DB::select(DB::raw('
-            SELECT id_user, nama, gapok, insentifKunjungan, bonusPenjualan, SUM(gapok + insentifKunjungan + bonusPenjualan) as totalGaji
+            SELECT id_user, nama, gapok, intensifKunjungan, bonusPenjualan, SUM(gapok + intensifKunjungan + bonusPenjualan) as totalGaji
             FROM (
-                SELECT user.id AS id_user, user.name AS nama, user.gajiPokok AS gapok, COUNT(transaksi.user_id) * 10000 AS insentifKunjungan, 	
+                SELECT user.id AS id_user, user.name AS nama, user.gajiPokok AS gapok, COUNT(transaksi.user_id) * 10000 AS intensifKunjungan, 	
                 SUM(transaksi.totalPrice) * 0.05 AS bonusPenjualan
                 FROM user
                 JOIN transaksi ON user.id = transaksi.user_id
@@ -64,7 +64,7 @@ class GajiController extends Controller
                 AND EXTRACT(YEAR FROM transaksi.waktu) = :inputTahun
                 GROUP BY user.id, user.name, user.gajiPokok
             )as subquery
-            GROUP BY id_user, nama, insentifKunjungan, bonusPenjualan, gapok
+            GROUP BY id_user, nama, intensifKunjungan, bonusPenjualan, gapok
         '), ['inputBulan' => $inputBulan, 'inputTahun' => $inputTahun]);
 
         // Add Gaji User ke Database
@@ -72,7 +72,7 @@ class GajiController extends Controller
                 Gaji::create([
                     'user_id' => $gajiSales->id_user,
                     'gajiPokok' => $gajiSales->gapok,
-                    'insentifKunjungan' => $gajiSales->insentifKunjungan,
+                    'intensifKunjungan' => $gajiSales->intensifKunjungan,
                     'bonusPenjualan' => $gajiSales->bonusPenjualan,
                     'gajiTotal' => $gajiSales->totalGaji,
                     'bulan' => $inputBulan,
