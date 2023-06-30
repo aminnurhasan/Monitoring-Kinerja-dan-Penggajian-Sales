@@ -19,22 +19,22 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $data = DB::table('transaksi')
-            ->select(DB::raw("DATE_FORMAT(waktu, '%Y-%m') AS bulan, SUM(quantity) AS totalQuantity"))
-            ->groupBy(DB::raw("DATE_FORMAT(waktu, '%Y-%m')"))
-            ->orderBy(DB::raw("DATE_FORMAT(waktu, '%Y-%m')"))
-            ->get();
+        // $data = DB::table('transaksi')
+        //     ->select(DB::raw("DATE_FORMAT(waktu, '%Y-%m') AS bulan, SUM(quantity) AS totalQuantity"))
+        //     ->groupBy(DB::raw("DATE_FORMAT(waktu, '%Y-%m')"))
+        //     ->orderBy(DB::raw("DATE_FORMAT(waktu, '%Y-%m')"))
+        //     ->get();
         
-        $chartData = [
-            'bulan' => ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
-            'totalQuantity' => []
-        ];
+        // $chartData = [
+        //     'bulan' => ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
+        //     'totalQuantity' => []
+        // ];
 
-        foreach ($data as $row){
-            $chartData['totalQuantity'][] = $row->totalQuantity;
-        }
+        // foreach ($data as $row){
+        //     $chartData['totalQuantity'][] = $row->totalQuantity;
+        // }
 
-        $request->merge(['chartData' => $chartData]);
+        // $request->merge(['chartData' => $chartData]);
 
         return $next($request);
     }

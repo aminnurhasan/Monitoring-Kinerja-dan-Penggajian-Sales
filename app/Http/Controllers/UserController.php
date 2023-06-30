@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-// use App\Traits\ImageStorage;
+use App\Traits\ImageStorage;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use DB;
 
 class UserController extends Controller
 {
-    // use ImageStorage;
+    use ImageStorage;
     /**
      * Display a listing of the resource.
      *
@@ -22,8 +23,27 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $user = User::all();
+        // $user = User::select(where);
+        $user = DB::select(DB::raw('
+            SELECT id, name, email, jenisKelamin, tglLahir, alamat, status
+            FROM user
+            WHERE role = 0
+        '));
         return view('pages.user.index', compact("user"));
+    }
+
+    public function status($id)
+    {
+        $user = User::findOrFail($id);
+        $statusGet = $user->status;
+        // dd($user);
+        if($statusGet == 0) {
+            $user->update(['status' => 1]);
+            return redirect()->route('user.index');
+        }else{
+            $user->update(['status' => 0]);
+            return redirect()->route('user.index');
+        }
     }
 
     /**
@@ -45,9 +65,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request['password'] = Hash::make($request->password);
+        $role = 0;
+        $foto = $request->file('foto');
 
-        User::create($request->all());
+        $user = [
+            'name' => $request->name,
+            'jenisKelamin' => $request->jenisKelamin,
+            'alamat' => $request->alamat,
+            'tglLahir' => $request->tglLahir,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'gajiPokok' => $request->gajiPokok,
+            'foto' => $this->uploadImage($foto, $request->name, 'profile'),
+            'role' => $role
+        ];
+
+        User::create($user);
 
         return redirect()->route('user.index');
     }
@@ -87,13 +120,19 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        if ($request->password) {
-            $request['password'] = Hash::make($request->password);
-        } else {
-            $request['password'] = $user->password;
-        }
+        $foto = $request->file('foto');
 
-        $user->update($request->all());
+        $update = [
+            'name' => $request->name,
+            'jenisKelamin' => $request->jenisKelamin,
+            'alamat' => $request->alamat,
+            'tglLahir' => $request->tglLahir,
+            'email' => $request->email,
+            'gajiPokok' => $request->gajiPokok,
+            'foto' => $this->uploadImage($foto, $request->name, 'profile', true, $user->foto),
+        ];
+
+        $user->update($update);
 
         return redirect()->route('user.index');
     }

@@ -47,9 +47,9 @@ class TokoController extends Controller
     public function create()
     {
         $user = DB::select(DB::raw('
-            SELECT id, name, email, is_admin
+            SELECT id, name, email, role
             FROM user
-            WHERE is_admin = 0
+            WHERE role = 0
         '));
         return view('pages.toko.create', compact('user'));
     }
@@ -112,9 +112,9 @@ class TokoController extends Controller
     {
         $toko = Toko::findOrFail($id);
         $user = DB::select(DB::raw('
-            SELECT id, name, email, is_admin
+            SELECT id, name, email, role
             FROM user
-            WHERE is_admin = 0
+            WHERE role = 0
         '));
         return view('pages.toko.edit', compact('toko', 'user'));
     }

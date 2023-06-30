@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Data User</h1>
+                <h1 class="m-0 text-dark">Data Sales</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -27,7 +27,7 @@
                     <div class="card-header">
                         <h3 class="card-title">
                             <i class="ion ion-clipboard mr-1"></i>
-                            Detail Data User
+                            Detail Data Sales
                         </h3>
                     </div>
                     
@@ -43,7 +43,23 @@
                                     <td>{{ $user->name }}</td>
                                 </tr>
                                 <tr>
-                                    <th>E-Mail</th>
+                                    <th>Jenis Kelamin</th>
+                                    @if ($user->jenisKelamin == 'l')
+                                        <td>Laki - Laki</td>
+                                    @else
+                                        <td>Perempuan</td>
+                                    @endif
+                                </tr>
+                                <tr>
+                                    <th>Alamat</th>
+                                    <td>{{ $user->alamat }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Tanggal Lahir</th>
+                                    <td>{{ $user->tglLahir }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Email</th>
                                     <td>{{ $user->email }}</td>
                                 </tr>
                                 <tr>
@@ -51,8 +67,8 @@
                                     <td>Rp. {{number_format($user->gajiPokok, 0, ',', '.')}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Is Admin</th>
-                                    <td>{{ $user->is_admin ? 'Yes' : 'No' }}</td>
+                                    <th>Foto</th>
+                                    <td><img width="350" src="{{ asset('/storage/profile/' . $user->foto) }}" alt=""></td>
                                 </tr>
                             </tbody>
                         </table>

@@ -52,19 +52,38 @@ class GajiController extends Controller
         $inputTahun = $request->input('tahun');
 
         // Query Menghitung Gaji Sales
+        // $totalGaji = DB::select(DB::raw('
+        //     SELECT id_user, nama, gapok, intensifKunjungan, bonusPenjualan, SUM(gapok + intensifKunjungan + bonusPenjualan) as totalGaji
+        //     FROM (
+        //         SELECT user.id AS id_user, user.name AS nama, user.gajiPokok AS gapok, COUNT(transaksi.user_id) * 10000 AS intensifKunjungan, 	
+        //         SUM(transaksi.totalPrice) * 0.05 AS bonusPenjualan
+        //         FROM user
+        //         JOIN transaksi ON user.id = transaksi.user_id
+        //         WHERE user.role = 0
+        //         AND EXTRACT(MONTH FROM transaksi.waktu) = :inputBulan
+        //         AND EXTRACT(YEAR FROM transaksi.waktu) = :inputTahun
+        //         GROUP BY user.id, user.name, user.gajiPokok
+        //     )as subquery
+        //     GROUP BY id_user, nama, intensifKunjungan, bonusPenjualan, gapok
+        // '), ['inputBulan' => $inputBulan, 'inputTahun' => $inputTahun]);
+        
         $totalGaji = DB::select(DB::raw('
-            SELECT id_user, nama, gapok, intensifKunjungan, bonusPenjualan, SUM(gapok + intensifKunjungan + bonusPenjualan) as totalGaji
+            SELECT id_user, nama, gapok, intensifKunjungan, bonusPenjualan, denda, SUM(gapok + intensifKunjungan + bonusPenjualan - denda) as totalGaji
             FROM (
                 SELECT user.id AS id_user, user.name AS nama, user.gajiPokok AS gapok, COUNT(transaksi.user_id) * 10000 AS intensifKunjungan, 	
-                SUM(transaksi.totalPrice) * 0.05 AS bonusPenjualan
+                SUM(transaksi.totalPrice) * 0.05 AS bonusPenjualan,
+                CASE
+                	WHEN COUNT(transaksi.user_id) < 10 THEN 100000
+                	ELSE 0
+                END AS denda
                 FROM user
                 JOIN transaksi ON user.id = transaksi.user_id
-                WHERE user.is_admin = 0
+                WHERE user.role = 0
                 AND EXTRACT(MONTH FROM transaksi.waktu) = :inputBulan
                 AND EXTRACT(YEAR FROM transaksi.waktu) = :inputTahun
                 GROUP BY user.id, user.name, user.gajiPokok
             )as subquery
-            GROUP BY id_user, nama, intensifKunjungan, bonusPenjualan, gapok
+            GROUP BY id_user, nama, intensifKunjungan, bonusPenjualan, gapok, denda
         '), ['inputBulan' => $inputBulan, 'inputTahun' => $inputTahun]);
 
         // Add Gaji User ke Database
@@ -74,6 +93,7 @@ class GajiController extends Controller
                     'gajiPokok' => $gajiSales->gapok,
                     'intensifKunjungan' => $gajiSales->intensifKunjungan,
                     'bonusPenjualan' => $gajiSales->bonusPenjualan,
+                    'denda' => $gajiSales->denda,
                     'gajiTotal' => $gajiSales->totalGaji,
                     'bulan' => $inputBulan,
                     'tahun' => $inputTahun

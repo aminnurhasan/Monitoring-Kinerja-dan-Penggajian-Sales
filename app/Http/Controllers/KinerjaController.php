@@ -22,9 +22,9 @@ class KinerjaController extends Controller
 
         // Sales
         $sales = DB::select(DB::raw('
-            SELECT id, name, email, is_admin
+            SELECT id, name, email, role
             FROM user
-            WHERE is_admin = 0
+            WHERE role = 0
         '));
 
         // Total Penjualan 

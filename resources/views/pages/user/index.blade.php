@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Data User</h1>
+                <h1 class="m-0 text-dark">Data Sales</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -29,13 +29,13 @@
                 </div>
                 @endif
 
-                <a href="{{ route('user.create') }}" class="btn btn-md btn-primary mb-2">Tambah Data User</a>
+                <a href="{{ route('user.create') }}" class="btn btn-md btn-primary mb-2">Tambah Data Sales</a>
                 
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
                             <i class="ion ion-clipboard mr-1"></i>
-                            List Data User
+                            List Data Sales
                         </h3>
                     </div>
 
@@ -44,9 +44,12 @@
                             <thead>
                                 <tr>
                                     <th class="col-1">ID</th>
-                                    <th class="col-3">Nama</th>
-                                    <th class="col-4">Email</th>
-                                    <th class="col-2">Hak Akses</th>
+                                    <th class="col-1">Nama</th>
+                                    <th class="col-1">Gender</th>
+                                    <th class="col-1">Tgl Lahir</th>
+                                    <th class="col-2">Alamat</th>
+                                    <th class="col-2">Email</th>
+                                    <th class="col-2">Status</th>
                                     <th class="col-2">Aksi</th>
                                 </tr>
                             </thead>
@@ -54,12 +57,22 @@
                                     <tr>
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->name }}</td>
+                                        {{-- <td>{{ $item->jenisKelamin }}</td> --}}
+                                        @if ($item->jenisKelamin == 'l')
+                                        <td>Laki - Laki</td>
+                                        @else
+                                            <td>Perempuan</td>
+                                        @endif
+                                        <td>{{ $item->tglLahir }}</td>
+                                        <td>{{ $item->alamat }}</td>
                                         <td>{{ $item->email }}</td>
-                                            @if($item->is_admin == 0)
-                                                <td>Sales</td>
+                                        <td class="text-center">
+                                            @if ($item->status == 0)
+                                                <a href="{{ route('statusUser', $item->id) }}" type="button" class="btn btn-danger">Non-aktif</a>
                                             @else
-                                                <td>Admin</td>
+                                                <a href="{{ route('statusUser', $item->id) }}" type="button" class="btn btn-success">Aktif</a>
                                             @endif
+                                        </td>
                                         <td>
                                             <a href='{{ route('user.show', $item->id) }}' class="btn btn-warning btn-sm fas fa-eye"></a>
                                             <a href='{{ url('user/' . $item->id . '/edit') }}' class="btn btn-warning btn-sm fas fa-pen"></a>

@@ -43,7 +43,7 @@ class HomeController extends Controller
 
         // Jumlah Sales
         $sales = DB::table('user')
-            ->where('is_admin', 0)
+            ->where('role', 0)
             ->count();
 
         // Jumlah Toko

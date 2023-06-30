@@ -55,6 +55,10 @@
                                     <td>Rp. {{ number_format($gaji->bonusPenjualan) }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Denda</th>
+                                    <td>Rp. {{ number_format($gaji->denda) }}</td>
+                                </tr>
+                                <tr>
                                     <th>Total Gaji</th>
                                     <td>Rp. {{ number_format($gaji->gajiTotal) }}</td>
                                 </tr>

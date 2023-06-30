@@ -44,13 +44,14 @@
                             <thead>
                                 <tr>
                                     <th class="col-1">ID</th>
-                                    <th class="col-2">Nama Sales</th>
+                                    <th class="col-1">Nama Sales</th>
                                     <th class="col-1">Bulan</th>
                                     <th class="col-1">Tahun</th>
-                                    <th class="col-2">Gaji Pokok</th>
+                                    <th class="col-1">Gaji Pokok</th>
                                     <th class="col-1">Insentif Kunjungan</th>
                                     <th class="col-1">Bonus Penjualan</th>
-                                    <th class="col-2">Total Gaji</th>
+                                    <th class="col-1">Denda</th>
+                                    <th class="col-1">Total Gaji</th>
                                     <th class="col-1">Action</th>
                                 </tr>
                             </thead>
@@ -88,6 +89,7 @@
                                         <td>Rp. {{ number_format($item->gajiPokok) }}</td>
                                         <td>Rp. {{ number_format($item->intensifKunjungan) }}</td>
                                         <td>Rp. {{ number_format($item->bonusPenjualan) }}</td>
+                                        <td>Rp. {{ number_format($item->denda) }}</td>
                                         <td>Rp. {{ number_format($item->gajiTotal) }}</td>
                                         <td>
                                             <a href='{{ route('gaji.show', $item->id) }}' class="btn btn-warning btn-sm fas fa-eye"></a>

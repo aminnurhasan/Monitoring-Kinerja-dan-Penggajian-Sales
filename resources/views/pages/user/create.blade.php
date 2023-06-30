@@ -40,6 +40,25 @@
                                 <input type="text" name="name" class="form-control">
                             </div>
                             <div class="form-group">
+                                <label for="" style="display: block">Jenis Kelamin</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="jenisKelamin" type="radio" id="inlineRadio1" value="l">
+                                    <label class="form-check-label" for="inlineRadio1">Laki - Laki</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="jenisKelamin" type="radio" id="inlineRadio2" value="p">
+                                    <label class="form-check-label" for="inlineRadio2">Perempuan</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Alamat</label>
+                                <input name="alamat" cols="3" class="form-control"></input>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Tanggal Lahir</label>
+                                <input type="text" name="tglLahir" class="form-control" placeholder="dd-mm-yyyy">
+                            </div>
+                            <div class="form-group">
                                 <label for="">Email</label>
                                 <input type="email" name="email" class="form-control">
                             </div>
@@ -51,15 +70,10 @@
                                 <label for="">Gaji Pokok</label>
                                 <input type="number" name="gajiPokok" class="form-control" value="2000000">
                             </div>
-                            <div class="form-group">
-                                <label for="" style="display: block">Is Admin?</label>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="is_admin" type="radio" id="inlineRadio1" value="1">
-                                    <label class="form-check-label" for="inlineRadio1">Yes</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="is_admin" type="radio" id="inlineRadio2" value="0">
-                                    <label class="form-check-label" for="inlineRadio2">No</label>
+                            <div class="mb-3 row">
+                                <label for="foto" class="col-sm-1 col-form-label">Foto</label>
+                                <div class="col-sm-11">
+                                    <input type="file" class="form-control" name='foto' id="foto">
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>

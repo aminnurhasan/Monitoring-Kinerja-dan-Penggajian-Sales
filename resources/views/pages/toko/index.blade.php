@@ -64,9 +64,9 @@
                                         {{-- <td><span class="badge {{ ($item->status == 0 ) ? 'badge-danger' : 'badge-success' }}">{{ ($item->status == 0 ) ? 'Tidak Aktif' : 'Aktif' }}</span></td> --}}
                                         <td>
                                             @if ($item->status == 0)
-                                                <a href="{{ route('status', $item->id) }}" type="button" class="btn btn-danger">Mati</a>
+                                                <a href="{{ route('statusToko', $item->id) }}" type="button" class="btn btn-danger">Mati</a>
                                             @else
-                                                <a href="{{ route('status', $item->id) }}" type="button" class="btn btn-success">Aktif</a>
+                                                <a href="{{ route('statusToko', $item->id) }}" type="button" class="btn btn-success">Aktif</a>
                                             @endif
                                         </td>
                                         {{-- <td>@livewire('toko-status', ['model' => $item, 'field' => 'status'], key($toko->id))</td> --}}

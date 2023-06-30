@@ -18,8 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('title');
             $table->string('alamat');
-            $table->string('latitude');
-            $table->string('longitude');
+            $table->string('latitude')->unique();
+            $table->string('longitude')->unique();
             $table->string('snippet');
             $table->boolean('status')->default(0);
 

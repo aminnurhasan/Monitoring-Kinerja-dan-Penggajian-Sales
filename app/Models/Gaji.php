@@ -16,6 +16,7 @@ class Gaji extends Model
         'gajiPokok',
         'intensifKunjungan',
         'bonusPenjualan',
+        'denda',
         'gajiTotal',
         'bulan',
         'tahun'
