@@ -5,10 +5,6 @@ namespace App\Traits;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-/**
- * Upload Image for Profile
- * And Attendance
- */
 trait ImageStorage
 {
     /**
