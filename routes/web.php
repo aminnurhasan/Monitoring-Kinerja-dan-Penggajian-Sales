@@ -34,6 +34,8 @@ Route::middleware(['auth', 'owner'])->group(function () {
     Route::resource('/owner/user', OwnerUserController::class);
     Route::resource('/owner/master', OwnerMasterGajiController::class);  
     Route::resource('/owner/kinerja', OwnerKinerjaController::class); 
+
+    Route::post('/owner/kinerja/input', [OwnerKinerjaController::class, 'input'])->name('input');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {

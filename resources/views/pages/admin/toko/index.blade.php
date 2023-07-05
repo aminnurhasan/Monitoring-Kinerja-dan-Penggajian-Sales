@@ -43,7 +43,7 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th class="col-1">ID</th>
+                                    <th class="col-1">No</th>
                                     <th class="col-2">Nama Toko</th>
                                     <th class="col-2">Nama Sales</th>
                                     <th class="col-2">Alamat</th>
@@ -56,7 +56,7 @@
                             <tbody>
                                 @foreach ($toko as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->title }}</td>
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->alamat }}</td>
@@ -72,9 +72,9 @@
                                         {{-- <td>@livewire('toko-status', ['model' => $item, 'field' => 'status'], key($toko->id))</td> --}}
                                         <td>
                                             <a href='{{ route('toko.show', $item->id) }}' class="btn btn-warning btn-sm fas fa-eye"></a>
-                                            <a href='{{ url('toko/' . $item->id . '/edit') }}' class="btn btn-warning btn-sm fas fa-pen"></a>
+                                            <a href='{{ url('/admin/toko/' . $item->id . '/edit') }}' class="btn btn-warning btn-sm fas fa-pen"></a>
                                             <form onsubmit="return confirm('Apakah Anda Ingin Menghapus Data ?')" class="d-inline"
-                                                action="{{ url('toko/' . $item->id) }}" method="post">
+                                                action="{{ url('/admin/toko/' . $item->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" name='submit' class="btn btn-danger btn-sm fas fa-trash-can"></button>

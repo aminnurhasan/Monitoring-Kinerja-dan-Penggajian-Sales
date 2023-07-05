@@ -44,7 +44,7 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th class="col-1">ID</th>
+                                    <th class="col-1">No</th>
                                     <th class="col-2">Nama Toko</th>
                                     <th class="col-2">Nama Karyawan</th>
                                     <th class="col-2">Quantity</th>
@@ -55,7 +55,7 @@
                             </thead>
                                 @foreach ($transaksi as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->tokoName }}</td>
                                         <td>{{ $item->salesName }}</td>
                                         <td>{{ $item->quantity }} Packs</td>

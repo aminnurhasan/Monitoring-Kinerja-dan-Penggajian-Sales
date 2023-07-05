@@ -46,22 +46,22 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th class="col-1">ID</th>
+                                    <th class="col-1">No</th>
                                     <th class="col-1">Nama Sales</th>
                                     <th class="col-1">Bulan</th>
                                     <th class="col-1">Tahun</th>
-                                    <th class="col-1">Gaji Pokok</th>
+                                    <th class="col-2">Gaji Pokok</th>
                                     <th class="col-1">Insentif Kunjungan</th>
                                     <th class="col-1">Bonus Penjualan</th>
                                     <th class="col-1">Denda</th>
-                                    <th class="col-1">Total Gaji</th>
+                                    <th class="col-2">Total Gaji</th>
                                     <th class="col-1">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($gaji as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->user->name }}</td>
                                             @if($item->bulan == 1)
                                                 <td>Januari</td>

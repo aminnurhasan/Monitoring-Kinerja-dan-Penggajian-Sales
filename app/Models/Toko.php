@@ -26,4 +26,9 @@ class Toko extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function click()
+    {
+        return $this->hasOne(Click::class);
+    }
 }

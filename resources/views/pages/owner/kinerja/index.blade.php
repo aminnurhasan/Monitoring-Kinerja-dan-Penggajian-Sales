@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('layouts.owner.app')
 
 @section('content')
 
@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Kinerja Sales</h1>
+                <h1 class="m-0 text-dark">Kinerja Sales Manajer</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -29,123 +29,76 @@
                 </div>
                 @endif
                 
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <i class="ion ion-clipboard mr-1"></i>
-                                    Penjualan Seluruh Sales
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="penjualan"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <i class="ion ion-clipboard mr-1"></i>
-                                    Sales Dengan Penjualan Terbanyak Bulan Ini
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <table id="" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th class="col-1">No</th>
-                                            <th class="col-4">Nama Sales</th>
-                                            <th class="col-3">Quantity</th>
-                                            <th class="col-3">Omset</th>
-                                        </tr>
-                                    </thead>
-                                        @foreach ($topSales as $item)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $item->nama }}</td>
-                                                <td>{{ $item->quantity }} Packs</td>
-                                                <td>Rp. {{ number_format($item->total) }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="card">
+                    <div class="card-body">
 
-                <form action="{{ route('kinerja.index') }}" method="get">
-                    @csrf
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-5 mt-2">
-                                    <label style="font-size: 13pt">Nama Sales :</label>
-                                </div>
-                                <div class="col-sm-5">
-                                    <select name="user_id" class="form-control" id="user_id">
-                                            @foreach ($sales as $item)
-                                                <option value="{{ $item->id }}" {{ $salesId == $item->id ? 'selected' : '' }} >{{ $item->name }}</option>
-                                            @endforeach
+                        <form action="{{ route('input') }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group row">
+                                <div class="col">
+                                    <label for="">Bulan</label>
+                                    <select name="bulan" class="form-control">
+                                            <option name="bulan" value="01">Januari</option>
+                                            <option name="bulan" value="02">Februari</option>
+                                            <option name="bulan" value="03">Maret</option>
+                                            <option name="bulan" value="04">April</option>
+                                            <option name="bulan" value="05">Mei</option>
+                                            <option name="bulan" value="06">Juni</option>
+                                            <option name="bulan" value="07">Juli</option>
+                                            <option name="bulan" value="08">Agustus</option>
+                                            <option name="bulan" value="09">September</option>
+                                            <option name="bulan" value="10">Oktober</option>
+                                            <option name="bulan" value="11">November</option>
+                                            <option name="bulan" value="12">Desember</option>
                                     </select>
                                 </div>
-                                <div class="col-sm-2">
-                                    <button type="submit" class="form-control btn btn-primary">Submit</button>
+                                <div class="col">
+                                    <label for="">Tahun</label>
+                                    <input type="number" class="form-control" name="tahun" value="2023">
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </form>
-
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <i class="ion ion-clipboard mr-1"></i>
-                            Kinerja Sales
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">
-                                            <i class="ion ion-clipboard mr-1"></i>
-                                            Omset Penjualan
-                                        </h3>
-                                        <div class="card-tools">
-                                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                                        </div>
-                                    </div>
-        
-                                    <div class="card-body">
-                                        <canvas id="penjualanPerSales"></canvas>
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary form-control">Submit</button>
                             </div>
-    
-                            <div class="col-md-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">
-                                            <i class="ion ion-clipboard mr-1"></i>
-                                            Jumlah Kunjungan Sales
-                                        </h3>
-                                        <div class="card-tools">
-                                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                                        </div>
-                                    </div>
-        
-                                    <div class="card-body">
-                                        <canvas id="kunjungan"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
+
+                @isset($click)
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="ion ion-clipboard mr-1"></i>
+                                List Kinerja Sales Manajer Pada {{$bln}}
+                            </h3>
+                        </div>
+
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="col-1">No</th>
+                                        <th class="col-1">Nama Toko</th>
+                                        <th class="col-2">Alamat</th>
+                                        <th class="col-1">Diaktifkan</th>
+                                        <th class="col-1">Dinonaktifkan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($click as $item)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->namaToko }}</td>
+                                            <td>{{ $item->alamat }}</td>
+                                            <td>{{ $item->aktif }}</td>
+                                            <td>{{ $item->nonaktif }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                @endisset
             </section>
         </div>
     </div>
@@ -155,7 +108,7 @@
 
 @push('scripts')
 {{-- Penjualan --}}
-<script type="text/javascript">
+{{-- <script type="text/javascript">
   
     var labelsPen =  {{ Js::from($labelsPen) }};
     var dataPen =  {{ Js::from($dataPen) }};
@@ -183,10 +136,10 @@
     configPenjualan
     );
   
-</script>
+</script> --}}
 
 {{-- Per Sales --}}
-<script type="text/javascript">
+{{-- <script type="text/javascript">
   
     var labelsPenSales =  {{ Js::from($labelsPenSales) }};
     var dataPenSales =  {{ Js::from($dataPenSales) }};
@@ -216,10 +169,10 @@
     configPenjualanSales
     );
   
-</script>
+</script> --}}
 
 {{-- Kunjungan Per Sales --}}
-<script type="text/javascript">
+{{-- <script type="text/javascript">
   
     var labelsKunjungan =  {{ Js::from($labelsKunjungan) }};
     var dataKunjungan =  {{ Js::from($dataKunjungan) }};
@@ -250,5 +203,5 @@
     configKunjungan
     );
   
-</script>
+</script> --}}
 @endpush

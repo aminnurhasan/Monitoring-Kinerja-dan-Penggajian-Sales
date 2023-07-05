@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Data Admin</h1>
+                <h1 class="m-0 text-dark">Data Sales Manajer</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -29,13 +29,13 @@
                 </div>
                 @endif
 
-                <a href="{{ route('user.create') }}" class="btn btn-md btn-primary mb-2">Tambah Data Admin</a>
+                <a href="{{ route('user.create') }}" class="btn btn-md btn-primary mb-2">Tambah Data Sales Manajer</a>
                 
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
                             <i class="ion ion-clipboard mr-1"></i>
-                            List Data Admin
+                            List Data Sales Manajer
                         </h3>
                     </div>
 
@@ -57,9 +57,8 @@
                                     <tr>
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->name }}</td>
-                                        {{-- <td>{{ $item->jenisKelamin }}</td> --}}
                                         @if ($item->jenisKelamin == 'l')
-                                        <td>Laki - Laki</td>
+                                            <td>Laki - Laki</td>
                                         @else
                                             <td>Perempuan</td>
                                         @endif
@@ -74,10 +73,10 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href='{{ route('user.show', $item->id) }}' class="btn btn-warning btn-sm fas fa-eye"></a>
-                                            <a href='{{ url('user/' . $item->id . '/edit') }}' class="btn btn-warning btn-sm fas fa-pen"></a>
+                                            <a href='{{ url('/owner/user', $item->id) }}' class="btn btn-warning btn-sm fas fa-eye"></a>
+                                            <a href='{{ url('/owner/user/' . $item->id . '/edit') }}' class="btn btn-warning btn-sm fas fa-pen"></a>
                                             <form onsubmit="return confirm('Apakah Anda Ingin Menghapus Data ?')" class="d-inline"
-                                                action="{{ url('user/' . $item->id) }}" method="post">
+                                                action="{{ url('/owner/user/' . $item->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" name='submit' class="btn btn-danger btn-sm fas fa-trash-can"></button>

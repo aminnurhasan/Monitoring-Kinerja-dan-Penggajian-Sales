@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('layouts.owner.app')
 
 @section('content')
 <div class="content-header">
@@ -27,7 +27,7 @@
                     <div class="card-header">
                         <h3 class="card-title">
                             <i class="ion ion-clipboard mr-1"></i>
-                            Detail Data Admin
+                            Detail Data Sales Manajer
                         </h3>
                     </div>
                     
@@ -61,10 +61,6 @@
                                 <tr>
                                     <th>Email</th>
                                     <td>{{ $user->email }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Gaji Pokok</th>
-                                    <td>Rp. {{number_format($user->gajiPokok, 0, ',', '.')}}</td>
                                 </tr>
                                 <tr>
                                     <th>Foto</th>

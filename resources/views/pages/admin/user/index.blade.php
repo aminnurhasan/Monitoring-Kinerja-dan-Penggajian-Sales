@@ -28,8 +28,6 @@
                     {{ session('status') }}
                 </div>
                 @endif
-
-                <a href="{{ route('user.create') }}" class="btn btn-md btn-primary mb-2">Tambah Data Sales</a>
                 
                 <div class="card">
                     <div class="card-header">
@@ -57,7 +55,6 @@
                                     <tr>
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->name }}</td>
-                                        {{-- <td>{{ $item->jenisKelamin }}</td> --}}
                                         @if ($item->jenisKelamin == 'l')
                                         <td>Laki - Laki</td>
                                         @else
@@ -75,9 +72,9 @@
                                         </td>
                                         <td>
                                             <a href='{{ route('user.show', $item->id) }}' class="btn btn-warning btn-sm fas fa-eye"></a>
-                                            <a href='{{ url('user/' . $item->id . '/edit') }}' class="btn btn-warning btn-sm fas fa-pen"></a>
+                                            <a href='{{ url('/admin/user/' . $item->id . '/edit') }}' class="btn btn-warning btn-sm fas fa-pen"></a>
                                             <form onsubmit="return confirm('Apakah Anda Ingin Menghapus Data ?')" class="d-inline"
-                                                action="{{ url('user/' . $item->id) }}" method="post">
+                                                action="{{ url('/admin/user/' . $item->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" name='submit' class="btn btn-danger btn-sm fas fa-trash-can"></button>
@@ -87,7 +84,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </section>

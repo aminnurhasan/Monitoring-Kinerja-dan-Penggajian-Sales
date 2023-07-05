@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Toko;
+use App\Models\Click;
 use DB;
 
 class AdminTokoController extends Controller
@@ -22,6 +23,8 @@ class AdminTokoController extends Controller
     public function index(Request $request)
     {
         $toko = Toko::all();
+        // $bulanSekarang = now()->format('Y-m');
+        // dd($bulanSekarang);
         return view('pages.admin.toko.index', compact("toko"));
     }
 
@@ -29,12 +32,47 @@ class AdminTokoController extends Controller
     {
         $toko = Toko::findOrFail($id);
         $statusGet = $toko->status;
+
         // dd($toko);
+        $bulanSekarang = now()->format('Y-m');
+
+        $click = Click::where('toko_id', $id)
+            ->where('bulan', $bulanSekarang)
+            ->first();
+
+        // dd($click);
+        
         if($statusGet == 0) {
             $toko->update(['status' => 1]);
+            if($click){
+                $click->klikAktif += 1;
+                $click->klikNonaktif += 0;
+                $click->save();
+            } else{
+                $click = [
+                    'toko_id' => $id,
+                    'bulan' => $bulanSekarang,
+                    'klikAktif' => 1,
+                    'klikNonaktif' => 0
+                ];
+                Click::create($click);
+            }
             return redirect()->route('toko.index');
         }else{
             $toko->update(['status' => 0]);
+            if($click){
+                $click->klikAktif += 0;
+                $click->klikNonaktif += 1;
+                $click->save();
+            } else{
+                $click = [
+                    'toko_id' => $id,   
+                    'bulan' => $bulanSekarang,
+                    'klikAktif' => 0,
+                    'klikNonaktif' => 1
+                ];
+                Click::create($click);
+            }
             return redirect()->route('toko.index');
         }
     }

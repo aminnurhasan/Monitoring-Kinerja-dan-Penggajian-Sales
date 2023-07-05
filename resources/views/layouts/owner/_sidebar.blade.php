@@ -25,7 +25,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="{{ url('/kinerja') }}" class="nav-link">
+                <a href="{{ url('/owner/kinerja') }}" class="nav-link">
                     <i class="nav-icon fas fa-chart-bar"></i>
                     <p>Kinerja Admin</p>
                 </a>

@@ -28,8 +28,6 @@
                     {{ session('status') }}
                 </div>
                 @endif
-
-                {{-- <a href="{{ route('user.create') }}" class="btn btn-md btn-primary mb-2">Tambah Data Admin</a> --}}
                 
                 <div class="card">
                     <div class="card-header">
@@ -43,7 +41,7 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th class="col-1">ID</th>
+                                    <th class="col-1">No</th>
                                     <th class="col-2">Gaji Pokok</th>
                                     <th class="col-2">Insentif Kunjungan</th>
                                     <th class="col-2">Bonus Penjualan</th>
@@ -53,7 +51,7 @@
                             </thead>
                                 @foreach ($master as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>Rp. {{ number_format($item->gapok) }}/Bulan</td>
                                         <td>Rp. {{ number_format($item->insentifKunjungan) }}/Kunjungan</td>
                                         <td>{{ $item->bonusPenjualan*100 }}%</td>
@@ -65,7 +63,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </section>

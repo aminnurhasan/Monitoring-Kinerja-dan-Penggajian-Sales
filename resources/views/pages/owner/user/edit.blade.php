@@ -5,11 +5,11 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Edit Data Admin</h1>
+                <h1 class="m-0 text-dark">Edit Data Sales Manajer</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ route('user.index') }}">User</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('user.index') }}">Sales Manajer</a></li>
                     <li class="breadcrumb-item active">Edit</li>
                 </ol>
             </div>
@@ -61,10 +61,6 @@
                             <div class="form-group">
                                 <label for="">Email</label>
                                 <input type="email" name="email" class="form-control" value="{{ old('email', $user->email) }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Gaji Pokok</label>
-                                <input type="number" name="gajiPokok" class="form-control" value="{{ old('gajiPokok', $user->gajiPokok) }}">
                             </div>
                             <div class="mb-3 row">
                                 <label for="foto" class="col-sm-1 col-form-label">Foto</label>
